@@ -32,19 +32,16 @@ export default async function handler(req, res) {
   }
 
   try {
-    // ✅ Nouvel endpoint GA (remplace l'ancien /v1/realtime/sessions)
     const response = await fetch("https://api.openai.com/v1/realtime/client_secrets", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${OPENAI_API_KEY}`,
         "Content-Type": "application/json",
-        // ✅ Pas de header OpenAI-Beta (retiré dans la GA)
       },
       body: JSON.stringify({
         session: {
           model: "gpt-realtime",
           type: "realtime",
-          voice: "alloy",
           modalities: ["audio", "text"],
         },
       }),
@@ -61,8 +58,6 @@ export default async function handler(req, res) {
 
     const data = await response.json();
     console.log("✅ Ephemeral key générée pour token:", token);
-
-    // ✅ Le token éphémère est dans data.value (pas data.client_secret.value)
     return res.status(200).json(data);
 
   } catch (err) {
