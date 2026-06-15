@@ -9,8 +9,8 @@ type Message = {
 type ConnectionStatus = "idle" | "connecting" | "connected" | "error";
 type InterviewMode = null | "apprentissage" | "simulation";
 
-const WEBRTC_URL = "https://api.openai.com/v1/realtime/calls";
-const MODEL      = "gpt-realtime";
+const WEBRTC_URL = "https://api.openai.com/v1/realtime";
+const MODEL      = "gpt-4o-realtime-preview-2024-12-17";
 
 // ── Token lu depuis l'URL — vérification réelle faite côté server.js ──
 function getTokenFromURL(): string | null {
@@ -307,12 +307,13 @@ export default function App() {
         sendEvent({
           type: "session.update",
           session: {
-            type: "realtime",
             instructions: INSTRUCTIONS,
-            audio: {
-              input: {
-                transcription: { model: "whisper-1" },
-              },
+            input_audio_transcription: { model: "whisper-1" },
+            turn_detection: {
+              type: "server_vad",
+              threshold: 0.85,
+              prefix_padding_ms: 500,
+              silence_duration_ms: 1200,
             },
           },
         });
