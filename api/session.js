@@ -1,7 +1,6 @@
 /**
  * api/session.js — Vercel Serverless Function
- * Remplace le serveur Express pour Vercel
- * Endpoint : GET /api/session?token=XXX
+ * Endpoint GA OpenAI Realtime : POST /v1/realtime/client_secrets
  */
 
 function getValidTokens() {
@@ -15,45 +14,39 @@ function isTokenValid(token) {
 }
 
 export default async function handler(req, res) {
-  // CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
+  if (req.method === "OPTIONS") return res.status(200).end();
+  if (req.method !== "GET") return res.status(405).json({ error: "Méthode non autorisée." });
 
-  if (req.method !== "GET") {
-    return res.status(405).json({ error: "Méthode non autorisée." });
-  }
-
-  // Vérification du token
   const token = req.query.token;
   if (!isTokenValid(token)) {
     return res.status(403).json({ error: "Token invalide ou manquant." });
   }
 
-  // Vérification de la clé OpenAI
   const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
   if (!OPENAI_API_KEY) {
-    console.error("❌ OPENAI_API_KEY manquante dans les variables Vercel");
-    return res.status(500).json({
-      error: "OPENAI_API_KEY manquante. Ajoutez-la dans les variables d'environnement Vercel.",
-    });
+    return res.status(500).json({ error: "OPENAI_API_KEY manquante." });
   }
 
   try {
-    // ✅ Bon endpoint + bon modèle OpenAI Realtime
-    const response = await fetch("https://api.openai.com/v1/realtime/sessions", {
+    // ✅ Nouvel endpoint GA (remplace l'ancien /v1/realtime/sessions)
+    const response = await fetch("https://api.openai.com/v1/realtime/client_secrets", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${OPENAI_API_KEY}`,
         "Content-Type": "application/json",
+        // ✅ Pas de header OpenAI-Beta (retiré dans la GA)
       },
       body: JSON.stringify({
-        model: "gpt-realtime",
-        voice: "alloy",
+        session: {
+          model: "gpt-realtime",
+          type: "realtime",
+          voice: "alloy",
+          modalities: ["audio", "text"],
+        },
       }),
     });
 
@@ -66,10 +59,11 @@ export default async function handler(req, res) {
       });
     }
 
-    const sessionData = await response.json();
-    console.log("✅ Session créée pour token:", token, "— expire à:", sessionData.expires_at);
+    const data = await response.json();
+    console.log("✅ Ephemeral key générée pour token:", token);
 
-    return res.status(200).json(sessionData);
+    // ✅ Le token éphémère est dans data.value (pas data.client_secret.value)
+    return res.status(200).json(data);
 
   } catch (err) {
     console.error("❌ Erreur serveur:", err);
