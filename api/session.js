@@ -43,8 +43,7 @@ export default async function handler(req, res) {
         session: {
           model: "gpt-realtime",
           type: "realtime",
-          input_audio_transcription: { model: "whisper-1" },
-        },
+                 },
       }),
     });
 
