@@ -9,7 +9,7 @@ type Message = {
 type ConnectionStatus = "idle" | "connecting" | "connected" | "error";
 type InterviewMode = null | "apprentissage" | "simulation";
 
-const WEBRTC_URL = "https://api.openai.com/v1/realtime";
+const WEBRTC_URL = "https://api.openai.com/v1/realtime/calls";
 const MODEL      = "gpt-realtime";
 
 // ── Token lu depuis l'URL — vérification réelle faite côté server.js ──
