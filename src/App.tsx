@@ -307,6 +307,7 @@ export default function App() {
         sendEvent({
           type: "session.update",
           session: {
+             type: "realtime", 
             instructions: INSTRUCTIONS,
             input_audio_transcription: { model: "whisper-1" },
             turn_detection: {
