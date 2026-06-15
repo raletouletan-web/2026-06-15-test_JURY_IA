@@ -10,7 +10,7 @@ type ConnectionStatus = "idle" | "connecting" | "connected" | "error";
 type InterviewMode = null | "apprentissage" | "simulation";
 
 const WEBRTC_URL = "https://api.openai.com/v1/realtime";
-const MODEL      = "gpt-4o-realtime-preview-2024-12-17";
+const MODEL      = "gpt-realtime";
 
 // ── Token lu depuis l'URL — vérification réelle faite côté server.js ──
 function getTokenFromURL(): string | null {
