@@ -38,11 +38,11 @@ export default async function handler(req, res) {
         Authorization: `Bearer ${OPENAI_API_KEY}`,
         "Content-Type": "application/json",
       },
+      // Body minimal — juste model et type
       body: JSON.stringify({
         session: {
           model: "gpt-realtime",
           type: "realtime",
-          modalities: ["audio", "text"],
         },
       }),
     });
