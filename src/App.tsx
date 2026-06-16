@@ -264,9 +264,18 @@ export default function App() {
       isPlayingRef.current    = false;
       isAISpeakingRef.current = false;
       setIsSpeaking(false);
-      // ── L'IA a fini → remettre le micro physiquement ──
-      if (micStreamRef.current && !synthesisStartedRef.current) {
-        micStreamRef.current.getTracks().forEach(t => { t.enabled = true; });
+      if (!synthesisStartedRef.current) {
+        // ── Réactiver le VAD et le micro quand l'IA a fini ──
+        sendEvent({
+          type: "session.update",
+          session: {
+            type: "realtime",
+            turn_detection: { type: "server_vad" },
+          },
+        });
+        if (micStreamRef.current) {
+          micStreamRef.current.getTracks().forEach(t => { t.enabled = true; });
+        }
       }
       return;
     }
@@ -324,18 +333,30 @@ export default function App() {
         break;
 
       case "response.audio.delta":
-        isAISpeakingRef.current = true;
-        // ── Couper le micro physiquement dès que l'IA parle ──
-        if (micStreamRef.current) {
-          micStreamRef.current.getTracks().forEach(t => { t.enabled = false; });
+        if (!isAISpeakingRef.current) {
+          isAISpeakingRef.current = true;
+          // ── Désactiver le VAD côté OpenAI pour bloquer toute interruption ──
+          sendEvent({
+            type: "session.update",
+            session: { type: "realtime", turn_detection: null },
+          });
+          if (micStreamRef.current) {
+            micStreamRef.current.getTracks().forEach(t => { t.enabled = false; });
+          }
         }
         enqueueAudio(event.delta);
         break;
 
       case "response.output_audio.delta":
-        isAISpeakingRef.current = true;
-        if (micStreamRef.current) {
-          micStreamRef.current.getTracks().forEach(t => { t.enabled = false; });
+        if (!isAISpeakingRef.current) {
+          isAISpeakingRef.current = true;
+          sendEvent({
+            type: "session.update",
+            session: { type: "realtime", turn_detection: null },
+          });
+          if (micStreamRef.current) {
+            micStreamRef.current.getTracks().forEach(t => { t.enabled = false; });
+          }
         }
         enqueueAudio(event.delta);
         break;
@@ -407,13 +428,8 @@ export default function App() {
       }
 
       case "input_audio_buffer.speech_started":
-        // ── BLOQUÉ si l'IA parle ou si synthèse en cours ──
         if (isAISpeakingRef.current || synthesisStartedRef.current) {
-          // Vider le buffer ET couper le micro pour empêcher toute interruption
           sendEvent({ type: "input_audio_buffer.clear" });
-          if (micStreamRef.current) {
-            micStreamRef.current.getTracks().forEach(t => { t.enabled = false; });
-          }
           break;
         }
         setIsListening(true);
@@ -426,8 +442,7 @@ export default function App() {
         break;
 
       case "response.done":
-        // ── Ne pas libérer le verrou ici — playNextChunk le fait quand la queue est vide ──
-        // setIsSpeaking(false) sera appelé par playNextChunk
+        // ── Ne pas libérer ici — playNextChunk le fait quand la queue audio est vide ──
         break;
 
       case "error":
