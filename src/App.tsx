@@ -262,21 +262,8 @@ export default function App() {
   const playNextChunk = useCallback(() => {
     if (!audioCtxRef.current || audioQueueRef.current.length === 0) {
       isPlayingRef.current    = false;
-      isAISpeakingRef.current = false;
+      isAISpeakingRef.current = false; // ── L'IA a fini de parler → micro réactivé
       setIsSpeaking(false);
-      if (!synthesisStartedRef.current) {
-        // ── Réactiver le VAD et le micro quand l'IA a fini ──
-        sendEvent({
-          type: "session.update",
-          session: {
-            type: "realtime",
-            turn_detection: { type: "server_vad" },
-          },
-        });
-        if (micStreamRef.current) {
-          micStreamRef.current.getTracks().forEach(t => { t.enabled = true; });
-        }
-      }
       return;
     }
     isPlayingRef.current    = true;
@@ -322,10 +309,11 @@ export default function App() {
           session: {
             type: "realtime",
             instructions: INSTRUCTIONS,
-            audio: {
-              input: {
-                transcription: { model: "whisper-1" },
-              },
+            turn_detection: {
+              type: "server_vad",
+              threshold: 0.90,
+              prefix_padding_ms: 500,
+              silence_duration_ms: 1500,
             },
           },
         });
@@ -333,31 +321,13 @@ export default function App() {
         break;
 
       case "response.audio.delta":
-        if (!isAISpeakingRef.current) {
-          isAISpeakingRef.current = true;
-          // ── Désactiver le VAD côté OpenAI pour bloquer toute interruption ──
-          sendEvent({
-            type: "session.update",
-            session: { type: "realtime", turn_detection: null },
-          });
-          if (micStreamRef.current) {
-            micStreamRef.current.getTracks().forEach(t => { t.enabled = false; });
-          }
-        }
+        // ── Dès le 1er chunk audio → verrou ON immédiatement ──
+        isAISpeakingRef.current = true;
         enqueueAudio(event.delta);
         break;
 
       case "response.output_audio.delta":
-        if (!isAISpeakingRef.current) {
-          isAISpeakingRef.current = true;
-          sendEvent({
-            type: "session.update",
-            session: { type: "realtime", turn_detection: null },
-          });
-          if (micStreamRef.current) {
-            micStreamRef.current.getTracks().forEach(t => { t.enabled = false; });
-          }
-        }
+        isAISpeakingRef.current = true;
         enqueueAudio(event.delta);
         break;
 
@@ -428,7 +398,9 @@ export default function App() {
       }
 
       case "input_audio_buffer.speech_started":
+        // ── BLOQUÉ si l'IA parle ou si synthèse en cours ──
         if (isAISpeakingRef.current || synthesisStartedRef.current) {
+          // Vider immédiatement le buffer pour annuler la détection
           sendEvent({ type: "input_audio_buffer.clear" });
           break;
         }
@@ -442,7 +414,10 @@ export default function App() {
         break;
 
       case "response.done":
-        // ── Ne pas libérer ici — playNextChunk le fait quand la queue audio est vide ──
+        // ── L'IA a terminé sa réponse → on libère le verrou ──
+        // On attend que la queue audio soit vide avant de libérer
+        // playNextChunk gère déjà isAISpeakingRef quand la queue est vide
+        setIsSpeaking(false);
         break;
 
       case "error":
@@ -469,7 +444,12 @@ export default function App() {
       if (!ephemeralKey) throw new Error("Token éphémère absent. Vérifiez /api/session.");
 
       const micStream = await navigator.mediaDevices.getUserMedia({
-        audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 24000 },
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: false,   // ← désactiver le gain auto (évite d'amplifier les sons faibles)
+          sampleRate: 24000,
+        },
       });
       micStreamRef.current = micStream;
       audioCtxRef.current  = new AudioContext({ sampleRate: 24000 });
@@ -672,7 +652,7 @@ export default function App() {
             <h1 className="mt-8 font-serif text-[26px] sm:text-[32px] md:text-[36px] leading-tight italic text-[#2f332a]">{statusLabel}</h1>
 
             <p className="mt-3 max-w-[500px] text-[14px] sm:text-[15px] leading-relaxed text-[#6f7566]">
-              {isConnected ? mode ? "Parlez naturellement en français. Attendez que le jury ait terminé avant de répondre." : "Dites MODE APPRENTISSAGE ou MODE SIMULATION pour commencer." : "Cliquez sur le bouton ci-dessous pour démarrer la simulation. Assurez-vous d'être dans un environnement calme et d'avoir autorisé l'accès à votre microphone."}
+              {isConnected ? mode ? "Parlez naturellement en français. Vous pouvez interrompre le jury à tout moment." : "Dites MODE APPRENTISSAGE ou MODE SIMULATION pour commencer." : "Cliquez sur le bouton ci-dessous pour démarrer la simulation. Assurez-vous d'être dans un environnement calme et d'avoir autorisé l'accès à votre microphone."}
             </p>
 
             {errorMsg && (
