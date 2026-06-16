@@ -309,7 +309,6 @@ export default function App() {
           session: {
              type: "realtime", 
             instructions: INSTRUCTIONS,
-                       turn_detection: {
               type: "server_vad",
               threshold: 0.85,
               prefix_padding_ms: 500,
