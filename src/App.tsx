@@ -305,14 +305,14 @@ export default function App() {
 
       case "session.created":
         sendEvent({
-          type: "session.update",
-          session: {
-             type: "realtime", 
-            instructions: INSTRUCTIONS,
-              type: "server_vad",
-              threshold: 0.85,
-              prefix_padding_ms: 500,
-              silence_duration_ms: 1200,
+          // ✅ APRÈS — remplace par ça
+sendEvent({
+  type: "session.update",
+  session: {
+    type: "realtime",
+    instructions: INSTRUCTIONS,
+  },
+});
             },
           },
         });
