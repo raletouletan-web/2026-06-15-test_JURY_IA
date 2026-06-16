@@ -262,8 +262,12 @@ export default function App() {
   const playNextChunk = useCallback(() => {
     if (!audioCtxRef.current || audioQueueRef.current.length === 0) {
       isPlayingRef.current    = false;
-      isAISpeakingRef.current = false; // ── L'IA a fini de parler → micro réactivé
+      isAISpeakingRef.current = false;
       setIsSpeaking(false);
+      // ── L'IA a fini de parler → remettre le micro physiquement ──
+      if (micStreamRef.current && !synthesisStartedRef.current) {
+        micStreamRef.current.getTracks().forEach(t => { t.enabled = true; });
+      }
       return;
     }
     isPlayingRef.current    = true;
@@ -309,19 +313,30 @@ export default function App() {
           session: {
             type: "realtime",
             instructions: INSTRUCTIONS,
+            audio: {
+              input: {
+                transcription: { model: "whisper-1" },
+              },
+            },
           },
         });
         sendEvent({ type: "response.create" });
         break;
 
       case "response.audio.delta":
-        // ── Dès le 1er chunk audio → verrou ON immédiatement ──
+        // ── Dès le 1er chunk audio → verrou ON + couper micro physiquement ──
         isAISpeakingRef.current = true;
+        if (micStreamRef.current) {
+          micStreamRef.current.getTracks().forEach(t => { t.enabled = false; });
+        }
         enqueueAudio(event.delta);
         break;
 
       case "response.output_audio.delta":
         isAISpeakingRef.current = true;
+        if (micStreamRef.current) {
+          micStreamRef.current.getTracks().forEach(t => { t.enabled = false; });
+        }
         enqueueAudio(event.delta);
         break;
 
@@ -641,7 +656,7 @@ export default function App() {
             <h1 className="mt-8 font-serif text-[26px] sm:text-[32px] md:text-[36px] leading-tight italic text-[#2f332a]">{statusLabel}</h1>
 
             <p className="mt-3 max-w-[500px] text-[14px] sm:text-[15px] leading-relaxed text-[#6f7566]">
-              {isConnected ? mode ? "Parlez naturellement en français. Vous pouvez interrompre le jury à tout moment." : "Dites MODE APPRENTISSAGE ou MODE SIMULATION pour commencer." : "Cliquez sur le bouton ci-dessous pour démarrer la simulation. Assurez-vous d'être dans un environnement calme et d'avoir autorisé l'accès à votre microphone."}
+              {isConnected ? mode ? "Parlez naturellement en français. Attendez que le jury ait terminé avant de répondre." : "Dites MODE APPRENTISSAGE ou MODE SIMULATION pour commencer." : "Cliquez sur le bouton ci-dessous pour démarrer la simulation. Assurez-vous d'être dans un environnement calme et d'avoir autorisé l'accès à votre microphone."}
             </p>
 
             {errorMsg && (
