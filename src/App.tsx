@@ -264,7 +264,7 @@ export default function App() {
       isPlayingRef.current    = false;
       isAISpeakingRef.current = false;
       setIsSpeaking(false);
-      // ── L'IA a fini de parler → remettre le micro physiquement ──
+      // ── L'IA a fini → remettre le micro physiquement ──
       if (micStreamRef.current && !synthesisStartedRef.current) {
         micStreamRef.current.getTracks().forEach(t => { t.enabled = true; });
       }
@@ -324,8 +324,8 @@ export default function App() {
         break;
 
       case "response.audio.delta":
-        // ── Dès le 1er chunk audio → verrou ON + couper micro physiquement ──
         isAISpeakingRef.current = true;
+        // ── Couper le micro physiquement dès que l'IA parle ──
         if (micStreamRef.current) {
           micStreamRef.current.getTracks().forEach(t => { t.enabled = false; });
         }
@@ -409,8 +409,11 @@ export default function App() {
       case "input_audio_buffer.speech_started":
         // ── BLOQUÉ si l'IA parle ou si synthèse en cours ──
         if (isAISpeakingRef.current || synthesisStartedRef.current) {
-          // Vider immédiatement le buffer pour annuler la détection
+          // Vider le buffer ET couper le micro pour empêcher toute interruption
           sendEvent({ type: "input_audio_buffer.clear" });
+          if (micStreamRef.current) {
+            micStreamRef.current.getTracks().forEach(t => { t.enabled = false; });
+          }
           break;
         }
         setIsListening(true);
@@ -423,10 +426,8 @@ export default function App() {
         break;
 
       case "response.done":
-        // ── L'IA a terminé sa réponse → on libère le verrou ──
-        // On attend que la queue audio soit vide avant de libérer
-        // playNextChunk gère déjà isAISpeakingRef quand la queue est vide
-        setIsSpeaking(false);
+        // ── Ne pas libérer le verrou ici — playNextChunk le fait quand la queue est vide ──
+        // setIsSpeaking(false) sera appelé par playNextChunk
         break;
 
       case "error":
