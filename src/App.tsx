@@ -305,15 +305,10 @@ export default function App() {
 
       case "session.created":
         sendEvent({
-          // ✅ APRÈS — remplace par ça
-sendEvent({
-  type: "session.update",
-  session: {
-    type: "realtime",
-    instructions: INSTRUCTIONS,
-  },
-});
-            },
+          type: "session.update",
+          session: {
+            type: "realtime",
+            instructions: INSTRUCTIONS,
           },
         });
         sendEvent({ type: "response.create" });
