@@ -63,13 +63,19 @@ export default async function handler(req, res) {
           model: "gpt-realtime",
           type: "realtime",
           instructions: INSTRUCTIONS,
-          turn_detection: {
-            type: "server_vad",
-            threshold: 0.90,
-            prefix_padding_ms: 500,
-            silence_duration_ms: 1500,
-            create_response: true,
-            interrupt_response: false,   // ← bloquer les interruptions
+          // ✅ Structure correcte selon la doc OpenAI GA
+          audio: {
+            input: {
+              noise_reduction: { type: "far_field" }, // réduit les fausses détections (écho, haut-parleur)
+              turn_detection: {
+                type: "server_vad",
+                threshold: 0.90,
+                prefix_padding_ms: 500,
+                silence_duration_ms: 1500,
+                create_response: true,
+                interrupt_response: false,  // ← bloquer les interruptions
+              },
+            },
           },
         },
       }),
@@ -86,8 +92,7 @@ export default async function handler(req, res) {
     }
 
     const data = JSON.parse(raw);
-    console.log("✅ Session créée pour token:", token);
-    console.log("📋 turn_detection:", JSON.stringify(data?.session?.audio?.input?.turn_detection));
+    console.log("✅ Session créée — interrupt_response:", data?.session?.audio?.input?.turn_detection?.interrupt_response);
     return res.status(200).json(data);
 
   } catch (err) {
