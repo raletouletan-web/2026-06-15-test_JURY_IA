@@ -1,6 +1,5 @@
 /**
  * api/session.js — Vercel Serverless Function
- * Endpoint GA OpenAI Realtime : POST /v1/realtime/client_secrets
  */
 
 const INSTRUCTIONS = `LANGUE : Tu DOIS parler UNIQUEMENT en français. Toutes tes réponses, questions et commentaires sont exclusivement en français. Ne parle jamais en anglais ni dans aucune autre langue.
@@ -64,12 +63,21 @@ export default async function handler(req, res) {
           model: "gpt-realtime",
           type: "realtime",
           instructions: INSTRUCTIONS,
+          turn_detection: {
+            type: "server_vad",
+            threshold: 0.90,
+            prefix_padding_ms: 500,
+            silence_duration_ms: 1500,
+            create_response: true,
+            interrupt_response: false,   // ← bloquer les interruptions
+          },
         },
       }),
     });
 
+    const raw = await response.text();
+
     if (!response.ok) {
-      const raw = await response.text();
       console.error(`❌ OpenAI ${response.status}:`, raw);
       return res.status(response.status).json({
         error: `OpenAI a retourné une erreur ${response.status}`,
@@ -77,12 +85,13 @@ export default async function handler(req, res) {
       });
     }
 
-    const data = await response.json();
+    const data = JSON.parse(raw);
     console.log("✅ Session créée pour token:", token);
+    console.log("📋 turn_detection:", JSON.stringify(data?.session?.audio?.input?.turn_detection));
     return res.status(200).json(data);
 
   } catch (err) {
     console.error("❌ Erreur serveur:", err);
-    return res.status(500).json({ error: "Erreur interne du serveur." });
+    return res.status(500).json({ error: "Erreur interne du serveur.", detail: err.message });
   }
 }
