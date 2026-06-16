@@ -309,14 +309,7 @@ export default function App() {
           session: {
             type: "realtime",
             instructions: INSTRUCTIONS,
-            turn_detection: {
-              type: "server_vad",
-              threshold: 0.90,
-              prefix_padding_ms: 500,
-              silence_duration_ms: 1500,
-              create_response: true,
-              interrupt_response: false,   // ← désactiver les interruptions
-            },
+                      },
           },
         });
         sendEvent({ type: "response.create" });
