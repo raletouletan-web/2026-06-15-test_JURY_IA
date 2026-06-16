@@ -64,12 +64,6 @@ export default async function handler(req, res) {
           model: "gpt-realtime",
           type: "realtime",
           instructions: INSTRUCTIONS,
-          turn_detection: {
-            type: "server_vad",
-            threshold: 0.85,
-            prefix_padding_ms: 500,
-            silence_duration_ms: 1200,
-          },
         },
       }),
     });
