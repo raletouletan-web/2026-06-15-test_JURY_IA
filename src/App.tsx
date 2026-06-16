@@ -309,7 +309,6 @@ export default function App() {
           session: {
             type: "realtime",
             instructions: INSTRUCTIONS,
-                      },
           },
         });
         sendEvent({ type: "response.create" });
