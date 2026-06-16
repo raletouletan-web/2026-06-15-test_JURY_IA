@@ -314,6 +314,8 @@ export default function App() {
               threshold: 0.90,
               prefix_padding_ms: 500,
               silence_duration_ms: 1500,
+              create_response: true,
+              interrupt_response: false,   // ← désactiver les interruptions
             },
           },
         });
@@ -444,12 +446,7 @@ export default function App() {
       if (!ephemeralKey) throw new Error("Token éphémère absent. Vérifiez /api/session.");
 
       const micStream = await navigator.mediaDevices.getUserMedia({
-        audio: {
-          echoCancellation: true,
-          noiseSuppression: true,
-          autoGainControl: false,   // ← désactiver le gain auto (évite d'amplifier les sons faibles)
-          sampleRate: 24000,
-        },
+        audio: { echoCancellation: true, noiseSuppression: true, sampleRate: 24000 },
       });
       micStreamRef.current = micStream;
       audioCtxRef.current  = new AudioContext({ sampleRate: 24000 });
