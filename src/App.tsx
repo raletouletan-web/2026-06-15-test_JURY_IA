@@ -24,8 +24,9 @@ type Referentiel = {
 // Liste des métiers disponibles (doit correspondre aux fichiers dans /referentiels/)
 const METIERS: { id: string; titre: string; diplome: string }[] = [
   { id: "aide-soignant",          titre: "Aide-Soignant",            diplome: "DEAS" },
-{ id: "educateur-jeunes-enfants", titre: "Éducateur de Jeunes Enfants", diplome: "DEEJE" },
    { id: "auxiliaire-de-puericulture",            titre: "Auxiliaire de puericulture",              diplome: "DEAP"  },
+{ id: "educateur-jeunes-enfants", titre: "Éducateur de Jeunes Enfants", diplome: "DEEJE" },
+  
   // ── Ajouter ici les autres métiers au fur et à mesure ──
 ];
 
