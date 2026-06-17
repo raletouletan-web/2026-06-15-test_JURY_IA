@@ -1,6 +1,6 @@
 /**
  * api/session.js — Vercel Serverless Function
- * Charge dynamiquement le référentiel métier et crée la session OpenAI
+ * Assemble le tronc commun (_commun.json) + le référentiel métier choisi
  */
 
 function getValidTokens() {
@@ -13,6 +13,15 @@ function isTokenValid(token) {
   return getValidTokens().includes(token);
 }
 
+// Remplace {{nb_questions}}, {{nb_domaines}}, {{duree_max}}, {{duree_simulation}} dans un template
+function remplir(template, referentiel) {
+  return template
+    .replace(/\{\{nb_questions\}\}/g, referentiel.nb_questions)
+    .replace(/\{\{nb_domaines\}\}/g, referentiel.domaines.length)
+    .replace(/\{\{duree_max\}\}/g, referentiel.duree_max)
+    .replace(/\{\{duree_simulation\}\}/g, referentiel.duree_simulation);
+}
+
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
@@ -21,7 +30,6 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") return res.status(200).end();
   if (req.method !== "GET") return res.status(405).json({ error: "Méthode non autorisée." });
 
-  // ── Bloquer les accès directs depuis un navigateur ──
   if (req.headers["sec-fetch-dest"] === "document") {
     return res.status(403).send(`<!DOCTYPE html>
 <html lang="fr"><head><meta charset="UTF-8"/><title>Accès refusé</title>
@@ -36,7 +44,6 @@ export default async function handler(req, res) {
   if (!isTokenValid(token)) {
     return res.status(403).json({ error: "Token invalide ou manquant." });
   }
-
   if (!metier) {
     return res.status(400).json({ error: "Métier manquant. Sélectionnez un métier." });
   }
@@ -46,26 +53,52 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "OPENAI_API_KEY manquante." });
   }
 
-  // ── Charger le référentiel depuis le dossier public ──
   let instructions;
   try {
     const protocol = req.headers["x-forwarded-proto"] || "https";
     const host = req.headers.host;
-    const refUrl = `${protocol}://${host}/referentiels/${metier}.json`;
 
-    const refRes = await fetch(refUrl);
-    if (!refRes.ok) {
+    // ── Charger en parallèle le tronc commun + le référentiel métier ──
+    const [communRes, metierRes] = await Promise.all([
+      fetch(`${protocol}://${host}/referentiels/_commun.json`),
+      fetch(`${protocol}://${host}/referentiels/${metier}.json`),
+    ]);
+
+    if (!communRes.ok) {
+      return res.status(500).json({ error: "Fichier _commun.json introuvable." });
+    }
+    if (!metierRes.ok) {
       return res.status(404).json({ error: `Référentiel "${metier}" introuvable.` });
     }
-    const referentiel = await refRes.json();
-    instructions = referentiel.instructions;
 
-    if (!instructions) {
-      return res.status(500).json({ error: `Référentiel "${metier}" invalide (instructions manquantes).` });
-    }
+    const commun = await communRes.json();
+    const referentiel = await metierRes.json();
+
+    // ── Assembler le prompt complet dans l'ordre ──
+    instructions = [
+      commun.intro,
+      "",
+      "════════════════════════════════════════════════",
+      `PROMPT IA VOCALE — JURY VAE ${referentiel.titre.toUpperCase()}`,
+      "Conçu par Patrice DIAKITÉ",
+      "════════════════════════════════════════════════",
+      "",
+      referentiel.identite_role,
+      "",
+      referentiel.referentiel_evaluation,
+      "",
+      "3. OUVERTURE OBLIGATOIRE\n(À prononcer textuellement, sans modification, dès le début)\n\n" + commun.ouverture_template,
+      "",
+      "4. FONCTIONNEMENT PAR MODE\n\n" + remplir(commun.fonctionnement_modes, referentiel),
+      "",
+      commun.analyse_continue,
+      "",
+      commun.synthese_finale,
+    ].join("\n");
+
   } catch (err) {
-    console.error("❌ Erreur chargement référentiel:", err);
-    return res.status(500).json({ error: "Impossible de charger le référentiel.", detail: err.message });
+    console.error("❌ Erreur chargement référentiels:", err);
+    return res.status(500).json({ error: "Impossible de charger les référentiels.", detail: err.message });
   }
 
   try {
