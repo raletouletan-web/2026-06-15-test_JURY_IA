@@ -25,6 +25,7 @@ type Referentiel = {
 const METIERS: { id: string; titre: string; diplome: string }[] = [
   { id: "aide-soignant",          titre: "Aide-Soignant",            diplome: "DEAS" },
    { id: "auxiliaire-de-puericulture",            titre: "Auxiliaire de puericulture",              diplome: "DEAP"  },
+  { id: "accompagnant-educatif-petite-enfance", titre: "Accompagnant Éducatif Petite Enfance", diplome: "CAP AEPE" },
 { id: "educateur-jeunes-enfants", titre: "Éducateur de Jeunes Enfants", diplome: "DEEJE" },
   { id: "educateur-specialise", titre: "Éducateur Spécialisé", diplome: "DEES" },
   { id: "moniteur-educateur", titre: "Moniteur Éducateur", diplome: "DEME" },
