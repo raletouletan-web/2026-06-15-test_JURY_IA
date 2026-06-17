@@ -26,6 +26,7 @@ const METIERS: { id: string; titre: string; diplome: string }[] = [
   { id: "aide-soignant",          titre: "Aide-Soignant",            diplome: "DEAS" },
    { id: "auxiliaire-de-puericulture",            titre: "Auxiliaire de puericulture",              diplome: "DEAP"  },
 { id: "educateur-jeunes-enfants", titre: "Éducateur de Jeunes Enfants", diplome: "DEEJE" },
+  { id: "educateur-specialise", titre: "Éducateur Spécialisé", diplome: "DEES" },
   
   // ── Ajouter ici les autres métiers au fur et à mesure ──
 ];
