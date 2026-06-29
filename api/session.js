@@ -113,6 +113,11 @@ export default async function handler(req, res) {
           model: "gpt-realtime",
           type: "realtime",
           instructions: instructions,
+          turn_detection: {
+      type: "server_vad",
+      threshold: 0.8,           // défaut 0.5 → augmenter réduit la sensibilité
+      prefix_padding_ms: 500,   // défaut 300 → silence avant de considérer que tu parles
+      silence_duration_ms: 800, // défaut 500 → silence avant de couper la parole
         },
       }),
     });
