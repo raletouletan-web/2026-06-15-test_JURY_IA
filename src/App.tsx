@@ -1163,7 +1163,7 @@ export default function App() {
             <h4 className="text-[11px] font-semibold tracking-wide text-[#5a5e50] uppercase">Sujets évalués</h4>
           </div>
           <ul className="space-y-1.5 text-[12px] text-[#5e6457]">
-            {["Actes essentiels & vie quotidienne","Soins, hygiène & prévention des risques","Communication & accompagnement famille","Transmissions & travail en équipe","Entretien des locaux & matériels"].map((s) => (
+            {["Savoir-faire attendus","Prestations professionnelles","Gestes et postures","Missions types"].map((s) => (
               <li key={s} className="flex gap-2"><span className="text-[#b0b5a5] flex-shrink-0">•</span>{s}</li>
             ))}
           </ul>
@@ -1176,7 +1176,7 @@ export default function App() {
             <h4 className="text-[11px] font-semibold tracking-wide text-[#5a5e50] uppercase">Conseils de préparation</h4>
           </div>
           <ul className="space-y-1.5 text-[12px] text-[#5e6457]">
-            {["Préparez des exemples concrets et datés","Maîtrisez le vocabulaire technique (asepsie, VAD, escarre…)","Décrivez vos gestes étape par étape","Citez votre structure d'exercice précisément","Ne vous pressez pas — le jury attend"].map((s) => (
+            {["Préparez des exemples concrets et datés","Maîtrisez le vocabulaire technique","Décrivez vos gestes étape par étape","Citez votre structure d'exercice précisément","Ne vous pressez pas — le jury attend"].map((s) => (
               <li key={s} className="flex gap-2"><span className="text-[#b0b5a5] flex-shrink-0">•</span>{s}</li>
             ))}
           </ul>
