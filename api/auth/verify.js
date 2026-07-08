@@ -4,7 +4,7 @@
  */
 
 import jwt from "jsonwebtoken";
-import * as cookie from "cookie";
+import cookie from "cookie";
 
 const AUTH_SECRET = process.env.AUTH_SECRET;
 const SESSION_COOKIE_NAME = "jury_ia_session";
@@ -25,11 +25,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Vérifie le jeton du lien magique (courte durée, 15 minutes)
     const payload = jwt.verify(token, AUTH_SECRET);
     const email = payload.email;
 
-    // Génère un nouveau jeton de session, plus longue durée (30 jours)
     const sessionToken = jwt.sign({ email }, AUTH_SECRET, { expiresIn: `${SESSION_DUREE_JOURS}d` });
 
     const cookieHeader = cookie.serialize(SESSION_COOKIE_NAME, sessionToken, {
@@ -43,13 +41,11 @@ export default async function handler(req, res) {
     res.setHeader("Set-Cookie", cookieHeader);
     console.log(`✅ Connexion réussie pour ${email}`);
 
-    // Redirige vers l'application (racine), la session est maintenant active via le cookie
     res.writeHead(302, { Location: "/" });
     return res.end();
 
   } catch (err) {
     console.error("❌ Lien de connexion invalide ou expiré:", err.message);
-    // Redirige vers l'accueil avec un paramètre d'erreur que le frontend peut afficher
     res.writeHead(302, { Location: "/?erreur=lien_expire" });
     return res.end();
   }
