@@ -4,7 +4,7 @@
  */
 
 import jwt from "jsonwebtoken";
-import { serialize } from "cookie";
+import * as cookie from "cookie";
 
 const AUTH_SECRET = process.env.AUTH_SECRET;
 const SESSION_COOKIE_NAME = "jury_ia_session";
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     // Génère un nouveau jeton de session, plus longue durée (30 jours)
     const sessionToken = jwt.sign({ email }, AUTH_SECRET, { expiresIn: `${SESSION_DUREE_JOURS}d` });
 
-    const cookie = serialize(SESSION_COOKIE_NAME, sessionToken, {
+    const cookieHeader = cookie.serialize(SESSION_COOKIE_NAME, sessionToken, {
       httpOnly: true,
       secure: true,
       sameSite: "lax",
@@ -40,7 +40,7 @@ export default async function handler(req, res) {
       maxAge: SESSION_DUREE_JOURS * 24 * 60 * 60,
     });
 
-    res.setHeader("Set-Cookie", cookie);
+    res.setHeader("Set-Cookie", cookieHeader);
     console.log(`✅ Connexion réussie pour ${email}`);
 
     // Redirige vers l'application (racine), la session est maintenant active via le cookie
