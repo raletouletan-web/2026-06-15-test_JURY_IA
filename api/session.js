@@ -1,16 +1,30 @@
 /**
  * api/session.js — Vercel Serverless Function
- * Assemble le tronc commun (_commun.json) + le référentiel métier choisi
+ * Assemble le tronc commun (_commun.json) + le référentiel métier choisi.
+ * Authentification désormais basée sur le cookie de session (voir api/auth/*),
+ * et non plus sur un token passé en paramètre d'URL.
  */
 
-function getValidTokens() {
-  const raw = process.env.VALID_TOKENS || "";
-  return raw.split(",").map((t) => t.trim()).filter(Boolean);
+import jwt from "jsonwebtoken";
+
+const AUTH_SECRET = process.env.AUTH_SECRET;
+const SESSION_COOKIE_NAME = "jury_ia_session";
+
+function lireCookie(req, nom) {
+  const cookies = req.headers.cookie || "";
+  const match = cookies.match(new RegExp(`(?:^|; )${nom}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]) : null;
 }
 
-function isTokenValid(token) {
-  if (!token) return false;
-  return getValidTokens().includes(token);
+function getEmailDeSession(req) {
+  const sessionToken = lireCookie(req, SESSION_COOKIE_NAME);
+  if (!sessionToken || !AUTH_SECRET) return null;
+  try {
+    const payload = jwt.verify(sessionToken, AUTH_SECRET);
+    return payload.email || null;
+  } catch (err) {
+    return null;
+  }
 }
 
 // Remplace {{nb_questions}}, {{nb_domaines}}, {{duree_max}}, {{duree_simulation}} dans un template
@@ -38,11 +52,11 @@ export default async function handler(req, res) {
 <body><div class="card"><h2>Accès non autorisé</h2><p>Cet endpoint est réservé à l'application.</p></div></body></html>`);
   }
 
-  const token = req.query.token;
+  const email = getEmailDeSession(req);
   const metier = req.query.metier;
 
-  if (!isTokenValid(token)) {
-    return res.status(403).json({ error: "Token invalide ou manquant." });
+  if (!email) {
+    return res.status(403).json({ error: "Session invalide ou expirée. Veuillez vous reconnecter." });
   }
   if (!metier) {
     return res.status(400).json({ error: "Métier manquant. Sélectionnez un métier." });
@@ -113,7 +127,7 @@ export default async function handler(req, res) {
           model: "gpt-realtime",
           type: "realtime",
           instructions: instructions,
-           },
+        },
       }),
     });
 
@@ -128,7 +142,7 @@ export default async function handler(req, res) {
     }
 
     const data = JSON.parse(raw);
-    console.log(`✅ Session créée — métier: ${metier}, token: ${token}`);
+    console.log(`✅ Session créée — métier: ${metier}, utilisateur: ${email}`);
     return res.status(200).json(data);
 
   } catch (err) {

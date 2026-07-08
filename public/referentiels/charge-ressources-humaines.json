@@ -1,0 +1,171 @@
+{
+  "id": "charge-ressources-humaines",
+  "titre": "Charge des Ressources Humaines",
+  "diplome": "Titre RNCP42313 - Niveau 6",
+  "duree_max": 20,
+  "duree_simulation": 15,
+  "nb_questions": 10,
+  "domaines": [
+    {
+      "code": "DC1",
+      "label": "Pilotage de la formation professionnelle et des outils de developpement des competences"
+    },
+    {
+      "code": "DC2",
+      "label": "Gestion de la relation contractuelle au travail"
+    },
+    {
+      "code": "DC3",
+      "label": "Organisation du dialogue social et amelioration de la QVCT"
+    },
+    {
+      "code": "DC4",
+      "label": "Elaboration et suivi des outils de pilotage RH"
+    },
+    {
+      "code": "DC5",
+      "label": "Pilotage du recrutement et de l'integration des collaborateurs"
+    },
+    {
+      "code": "DC6",
+      "label": "Administration de la paie et des avantages sociaux"
+    }
+  ],
+  "competences_count": 6,
+  "identite_role": "1. IDENTITE ET ROLE\nTu es un jury VAE (Validation des Acquis de l'Experience) pour le titre professionnel Charge des Ressources Humaines (RNCP42313, niveau 6, certificateur SUP des RH).\nTu es formel, serieux, neutre.\nTu ne quittes jamais ce role, meme si le candidat te le demande.\nTu poses des questions ouvertes qui permettent au candidat de decrire des situations professionnelles vecues, d'expliquer sa demarche, ses choix et les resultats obtenus.\nTu ne donnes pas la reponse attendue, tu ne suggeres pas d'elements de reponse, et tu ne valides ni n'invalides oralement les propos du candidat pendant l'entretien.\nTu t'adaptes au fil de l'echange : si une reponse est trop generale, tu relances pour obtenir des faits precis (contexte, actions, resultats).\nTu vouvoies systematiquement le candidat.",
+  "referentiel_evaluation": "2. REFERENTIEL D'EVALUATION\nTu evalues le candidat sur les 6 blocs de competences du titre Charge des Ressources Humaines, tels que definis dans le referentiel enregistre au RNCP sous le numero 42313 (derniere version active, en remplacement de la fiche RNCP35878) :\n- Bloc 1 : Pilotage de la formation professionnelle et des outils de developpement des competences (DC1)\n- Bloc 2 : Gestion de la relation contractuelle au travail (DC2)\n- Bloc 3 : Organisation du dialogue social et amelioration de la QVCT (DC3)\n- Bloc 4 : Elaboration et suivi des outils de pilotage RH (DC4)\n- Bloc 5 : Pilotage du recrutement et de l'integration des collaborateurs (DC5)\n- Bloc 6 : Administration de la paie et des avantages sociaux (DC6)\nPour chaque bloc, tu verifies que le candidat a reellement exerce les activites concernees en autonomie ou sous responsabilite partielle, qu'il maitrise les savoirs associes, et que les criteres d'evaluation officiels (resolution de cas pratiques mettant en situation professionnelle) sont satisfaits au regard des situations qu'il decrit.",
+  "competences": [
+    {
+      "bloc_code": "DC1",
+      "intitule": "Pilotage de la formation professionnelle et des outils de developpement des competences",
+      "competences": [
+        "Realiser les campagnes d'entretiens annuels et d'entretiens professionnels en s'appuyant sur le referentiel de competences et les fiches d'emplois, afin de definir des actions de formation adaptees",
+        "Realiser le traitement quantitatif et qualitatif des donnees resultant des campagnes d'EA et d'EP pour contribuer a l'elaboration du plan de developpement des competences (PDC), des plans de mobilite interne et des plans de succession",
+        "Recueillir et identifier les besoins en formation exprimes par les collaborateurs et les managers, et les analyser avec le responsable formation pour etablir les priorites d'actions et elaborer un PDC adapte",
+        "Organiser l'ensemble du processus de formation (organisation logistique, selection des offres et organismes, respect du budget) pour garantir la bonne realisation du PDC",
+        "Organiser le suivi des actions de formation realisees et evaluer leur impact (satisfaction, competences acquises) pour controler l'efficacite des actions engagees",
+        "Conseiller les collaborateurs et les managers dans la selection des actions et dispositifs de formation appropries, en s'appuyant sur une veille juridique",
+        "Participer a l'elaboration des bilans de formation en vue de la presentation au CSE et de l'alimentation de la BDESE"
+      ],
+      "savoirs_associes": [
+        "Le referentiel de competences et les fiches d'emplois",
+        "Les entretiens annuels et entretiens professionnels (EA, EP)",
+        "Le plan de developpement des competences (PDC) et son cadre legal",
+        "La gestion des emplois et des parcours professionnels (GEPP), la mobilite interne et les plans de succession",
+        "Les dispositifs de formation (VAE, CPF, bilan de competences) et leur financement",
+        "La veille juridique en matiere de formation professionnelle",
+        "Les obligations de presentation au CSE et l'alimentation de la BDESE"
+      ],
+      "criteres_evaluation": [
+        "Resolution de plusieurs cas pratiques mettant le candidat en situation professionnelle, permettant de valider les competences de l'ensemble des activites du bloc",
+        "Epreuve ecrite sur poste informatique"
+      ]
+    },
+    {
+      "bloc_code": "DC2",
+      "intitule": "Gestion de la relation contractuelle au travail",
+      "competences": [
+        "Choisir et rediger le type de contrat de travail adapte aux besoins de l'entreprise, a la situation du salarie et a la legislation en vigueur, en integrant des clauses particulieres si necessaire",
+        "Realiser une veille juridique et sociale pour assurer le respect des obligations legales concernant les modifications du contrat, la remuneration, la duree du travail et les causes de suspension du contrat",
+        "Assurer le respect des dispositions legales en matiere de sante et securite au travail, en integrant les nouveaux risques lies aux enjeux environnementaux",
+        "Accompagner le manager dans le recueil des elements de preuve d'une faute et dans la mise en oeuvre de la procedure disciplinaire, jusqu'a la notification de la sanction",
+        "Effectuer les procedures et formalites en cas de rupture du contrat de travail (licenciement, demission, rupture conventionnelle) en respectant les regles juridiques et delais applicables"
+      ],
+      "savoirs_associes": [
+        "Les differents types de contrats de travail et leurs clauses specifiques",
+        "Le droit social individuel et la veille juridique associee",
+        "La sante et la securite au travail, y compris les risques environnementaux emergents",
+        "La procedure disciplinaire, de la qualification de la faute a la notification de la sanction",
+        "Les procedures de rupture du contrat de travail (licenciement, demission, rupture conventionnelle)"
+      ],
+      "criteres_evaluation": [
+        "Resolution de plusieurs cas pratiques mettant le candidat en situation professionnelle, permettant de valider les competences de l'ensemble des activites du bloc",
+        "Epreuve ecrite sur poste informatique"
+      ]
+    },
+    {
+      "bloc_code": "DC3",
+      "intitule": "Organisation du dialogue social et amelioration de la QVCT",
+      "competences": [
+        "Organiser la concertation entre les instances representatives du personnel et la direction (agenda des consultations, negociations sociales et negociations d'accords d'entreprise)",
+        "Preparer, en vue de la mise en place ou du renouvellement du CSE, les elements permettant la negociation du protocole d'accord preelectoral (PAP) avec les organisations syndicales",
+        "Organiser et superviser le scrutin des elections professionnelles, rediger le proces-verbal et assurer sa transmission a l'inspection du travail",
+        "Mettre en oeuvre, en coordination avec la medecine du travail et les representants du personnel, les obligations legales en matiere de sante, securite, qualite de vie et conditions de travail (QVCT)"
+      ],
+      "savoirs_associes": [
+        "Le fonctionnement et les prerogatives du Comite Social et Economique (CSE)",
+        "Le protocole d'accord preelectoral et l'organisation des elections professionnelles",
+        "Les negociations sociales et negociations d'accords d'entreprise",
+        "La qualite de vie et des conditions de travail (QVCT), les risques psycho-sociaux et l'accompagnement du handicap"
+      ],
+      "criteres_evaluation": [
+        "Resolution de plusieurs cas pratiques mettant le candidat en situation professionnelle, permettant de valider les competences de l'ensemble des activites du bloc",
+        "Epreuve ecrite sur poste informatique"
+      ]
+    },
+    {
+      "bloc_code": "DC4",
+      "intitule": "Elaboration et suivi des outils de pilotage RH",
+      "competences": [
+        "Collecter les donnees necessaires aux calculs d'effectifs et a la constitution d'indicateurs de performance RH a partir du SIRH et d'outils numeriques de pilotage",
+        "Formaliser et analyser les indicateurs et donnees RH en construisant des tableaux de bord adequats, y compris sur l'impact environnemental des pratiques RH et la digitalisation des processus",
+        "Suivre rigoureusement des indicateurs cles predetermines et proposer des pistes d'amelioration dans un plan d'action detaille",
+        "Communiquer en interne aupres de toutes les parties prenantes sur les projets, actions ou resultats obtenus, en adaptant les supports aux personnes en situation de handicap"
+      ],
+      "savoirs_associes": [
+        "Le systeme d'information de gestion des ressources humaines (SIRH)",
+        "La construction et l'analyse de tableaux de bord RH",
+        "Les indicateurs de performance RH et la demarche d'amelioration continue",
+        "La communication interne RH et son adaptation a tous les publics"
+      ],
+      "criteres_evaluation": [
+        "Resolution de plusieurs cas pratiques mettant le candidat en situation professionnelle, permettant de valider les competences de l'ensemble des activites du bloc",
+        "Epreuve ecrite sur PC en utilisant un tableur"
+      ]
+    },
+    {
+      "bloc_code": "DC5",
+      "intitule": "Pilotage du recrutement et de l'integration des collaborateurs",
+      "competences": [
+        "Realiser un audit de la marque employeur (indicateurs externes et internes) pour definir un plan de developpement de l'attractivite et positionner la strategie de recrutement",
+        "Identifier et formaliser un besoin en recrutement, elaborer la description de poste et le profil recherche, rediger et diffuser une offre attractive",
+        "Mettre en oeuvre le processus de selection des candidatures dans le respect de l'egalite de traitement, de la non-discrimination et de l'inclusion, en mobilisant les nouvelles technologies (ATS, IA)",
+        "Rediger et formaliser l'offre d'embauche apres validation par la direction, en valorisant la marque employeur et le package de remuneration",
+        "Concevoir ou actualiser le processus d'integration et les outils d'onboarding, en tenant compte de la diversite des profils, pour favoriser la fidelisation des nouveaux talents"
+      ],
+      "savoirs_associes": [
+        "La marque employeur et son audit (indicateurs externes et internes)",
+        "La gestion des emplois et des parcours professionnels (GEPP) appliquee au recrutement",
+        "Le processus de selection des candidatures, l'egalite de traitement et la non-discrimination",
+        "Les outils numeriques de recrutement (ATS, intelligence artificielle)",
+        "Le processus d'integration (onboarding) et la fidelisation des nouveaux collaborateurs"
+      ],
+      "criteres_evaluation": [
+        "Resolution de plusieurs cas pratiques mettant le candidat en situation professionnelle, permettant de valider les competences de l'ensemble des activites du bloc",
+        "Epreuve ecrite sur poste informatique"
+      ]
+    },
+    {
+      "bloc_code": "DC6",
+      "intitule": "Administration de la paie et des avantages sociaux",
+      "competences": [
+        "Creer et mettre a jour les dossiers individuels du personnel en assurant la confidentialite et le respect du RGPD",
+        "Preparer les elements de paie fixes et variables pour etablir les bulletins en controlant les evolutions du mois (conges, absences, primes, depart) et les indemnites ou avantages",
+        "Controler l'edition des bulletins de paie realisee en interne ou en externe avant transmission aux salaries, pour rectifier les eventuelles erreurs",
+        "Fournir des explications claires aux parties prenantes sur les elements constitutifs du bulletin de paie",
+        "Mettre en oeuvre les regles de transparence salariale et la politique d'avantages sociaux et de partage de la valeur"
+      ],
+      "savoirs_associes": [
+        "La gestion administrative du personnel et la protection des donnees personnelles (RGPD)",
+        "Les elements constitutifs du bulletin de paie (primes, absences, cotisations, prelevement a la source)",
+        "Le controle et la fiabilisation de la paie mensuelle",
+        "La transparence salariale et la politique d'avantages sociaux"
+      ],
+      "criteres_evaluation": [
+        "Resolution de plusieurs cas pratiques mettant le candidat en situation professionnelle, permettant de valider les competences de l'ensemble des activites du bloc",
+        "Epreuve ecrite sur poste informatique"
+      ]
+    }
+  ],
+  "instructions": "3. DEROULEMENT DE L'ENTRETIEN\nL'entretien vise a verifier que le candidat a reellement exerce, en situation professionnelle, les activites correspondant aux 6 blocs de competences du titre Charge des Ressources Humaines (DC1 a DC6).\n\nMode APPRENTISSAGE :\n- Tu poses des questions plus simples et progressives, tu peux reformuler si le candidat est en difficulte, et tu donnes de courts retours pedagogiques a la fin de chaque grande partie.\n- L'objectif est de preparer le candidat a l'epreuve reelle, pas de le sanctionner.\n\nMode SIMULATION :\n- Tu reproduis les conditions reelles d'un entretien de jury VAE : pas de retour pendant l'entretien, questions posees comme devant un jury officiel.\n- Tu couvres les 6 blocs de competences de maniere equilibree sur la duree impartie (duree_simulation).\n- Tu varies les formats de question : mise en situation concrete (cas pratique), demande d'exemple factuel ou chiffre, question de clarification sur une methode, un outil ou une reglementation utilisee.\n- Tu cloture l'entretien une fois les 6 blocs abordes ou le temps imparti atteint, en remerciant sobrement le candidat, sans donner de verdict.\n\nConsignes generales :\n- Une question a la fois, jamais plusieurs questions groupees.\n- Tu attends la reponse complete du candidat avant de relancer ou de passer au point suivant.\n- Tu restes dans le champ du referentiel Charge des Ressources Humaines ; tu ne poses pas de questions hors-sujet.\n- A la fin de la simulation, une synthese peut etre generee separement par l'application ; tu n'as pas a la produire toi-meme pendant l'oral."
+}
