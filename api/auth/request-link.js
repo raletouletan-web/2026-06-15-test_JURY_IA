@@ -40,6 +40,34 @@ function parseCSV(texte) {
   });
 }
 
+// ── Parseur de date FRANÇAIS explicite (JJ/MM/AAAA), sans ambiguïté ──
+// new Date("06/07/2026") est interprété par JavaScript en MM/JJ/AAAA (US),
+// ce qui inverse silencieusement le jour et le mois. Cette fonction évite
+// totalement ce piège en parsant les 3 segments nous-mêmes.
+// Retourne un objet Date représentant la FIN de la journée d'expiration
+// (23h59), pour que la date du jour même reste valide jusqu'à minuit.
+function parseDateFrancaise(valeur) {
+  if (!valeur) return null;
+  const match = valeur.trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (!match) return null;
+
+  const jour = parseInt(match[1], 10);
+  const mois = parseInt(match[2], 10);
+  const annee = parseInt(match[3], 10);
+
+  if (mois < 1 || mois > 12 || jour < 1 || jour > 31) return null;
+
+  // Mois 0-indexé pour le constructeur Date ; on prend la fin de journée (23:59:59.999)
+  const date = new Date(annee, mois - 1, jour, 23, 59, 59, 999);
+
+  // Vérifie que la date construite correspond bien aux valeurs saisies
+  // (empêche par ex. "31/02/2026" de silencieusement devenir le 3 mars)
+  if (date.getFullYear() !== annee || date.getMonth() !== mois - 1 || date.getDate() !== jour) {
+    return null;
+  }
+  return date;
+}
+
 async function trouverClientValide(email) {
   // Ajout d'un paramètre unique + no-store pour contourner le cache CDN de Google
   // sur le lien "publié sur le web", qui peut sinon renvoyer une version périmée.
@@ -59,9 +87,17 @@ async function trouverClientValide(email) {
     if (!rowEmail) continue;
     if (rowEmail.trim().toLowerCase() === emailLower) {
       if (dateExpiration) {
-        const expiration = new Date(dateExpiration);
+        const expiration = parseDateFrancaise(dateExpiration);
         const maintenant = new Date();
-        if (!isNaN(expiration.getTime()) && expiration < maintenant) {
+
+        if (expiration === null) {
+          // Date illisible/mal formée dans la feuille : on bloque par prudence
+          // plutôt que d'accorder un accès illimité par erreur.
+          console.error(`⚠️ Date d'expiration invalide pour ${email} : "${dateExpiration}"`);
+          return { trouve: true, valide: false };
+        }
+
+        if (expiration < maintenant) {
           return { trouve: true, valide: false }; // abonnement expiré
         }
       }
