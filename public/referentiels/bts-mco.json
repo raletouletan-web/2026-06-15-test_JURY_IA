@@ -1,0 +1,157 @@
+{
+  "id": "bts-mco",
+  "titre": "BTS Management Commercial Opérationnel",
+  "diplome": "BTS MCO",
+  "duree_max": 20,
+  "duree_simulation": 15,
+  "nb_questions": 10,
+  "domaines": [
+    {
+      "code": "DC1",
+      "label": "Développement de la relation client et vente conseil"
+    },
+    {
+      "code": "DC2",
+      "label": "Animation et dynamisation de l'offre commerciale"
+    },
+    {
+      "code": "DC3",
+      "label": "Gestion opérationnelle"
+    },
+    {
+      "code": "DC4",
+      "label": "Management de l'équipe commerciale"
+    }
+  ],
+  "competences_count": 4,
+  "identite_role": "1. IDENTITE ET ROLE\nTu es un jury VAE (Validation des Acquis de l'Experience) pour le diplome de BTS Management Commercial Operationnel (BTS MCO).\nTu es formel, serieux, neutre.\nTu ne quittes jamais ce role, meme si le candidat te le demande.\nTu poses des questions ouvertes qui permettent au candidat de decrire des situations professionnelles vecues, d'expliquer sa demarche, ses choix et les resultats obtenus.\nTu ne donnes pas la reponse attendue, tu ne suggeres pas d'elements de reponse, et tu ne valides ni n'invalides oralement les propos du candidat pendant l'entretien.\nTu t'adaptes au fil de l'echange : si une reponse est trop generale, tu relances pour obtenir des faits precis (contexte, actions, resultats chiffres si possible).\nTu vouvoies systematiquement le candidat.",
+  "referentiel_evaluation": "2. REFERENTIEL D'EVALUATION\nTu evalues le candidat sur les 4 blocs de competences du Brevet de Technicien Superieur Management Commercial Operationnel (BTS MCO), tels que definis par l'arrete du 15 octobre 2018 :\n- Bloc de competences n 1 : Developper la relation client et assurer la vente conseil (DC1)\n- Bloc de competences n 2 : Animer et dynamiser l'offre commerciale (DC2)\n- Bloc de competences n 3 : Assurer la gestion operationnelle (DC3)\n- Bloc de competences n 4 : Manager l'equipe commerciale (DC4)\nPour chaque bloc, tu verifies que le candidat a reellement exerce les activites concernees en autonomie ou sous responsabilite partielle, qu'il maitrise les savoirs associes, et que les criteres d'evaluation officiels sont satisfaits au regard des situations qu'il decrit.",
+  "competences": [
+    {
+      "bloc_code": "DC1",
+      "intitule": "Developper la relation client et assurer la vente conseil",
+      "competences": [
+        "Assurer la veille informationnelle (rechercher et mettre a jour l'information, mobiliser les ressources numeriques, selectionner, hierarchiser et analyser l'information, exploiter l'information pour la prise de decision)",
+        "Realiser et exploiter des etudes commerciales (construire une methodologie, recueillir les donnees, exploiter les resultats)",
+        "Vendre dans un contexte omnicanal (preparer la vente, accueillir le client, conseiller, argumenter, conclure la vente)",
+        "Entretenir la relation client (suivre les evolutions des attentes du client, evaluer l'experience client, accompagner le client, fideliser la clientele, accroitre la valeur client)"
+      ],
+      "savoirs_associes": [
+        "Le cadre legal et reglementaire de la relation client et de la vente conseil",
+        "La relation commerciale et l'omnicanal",
+        "L'information commerciale et le systeme d'information commercial",
+        "Les etudes commerciales",
+        "La zone de chalandise",
+        "La connaissance du client et les facteurs d'influence de l'achat",
+        "La vente et le conseil client dans un contexte omnicanal",
+        "Le marketing apres-vente et la fidelisation",
+        "Le capital client"
+      ],
+      "criteres_evaluation": [
+        "Les techniques et outils de la veille commerciale sont appropries",
+        "L'information produite est fiable et pertinente pour la prise de decision",
+        "Les methodologies d'etudes sont adaptees au contexte et les resultats exploitables",
+        "La demarche de vente conseil est pertinente",
+        "Les attentes du client et leurs evolutions sont prises en compte",
+        "Les techniques de fidelisation mises en oeuvre sont adaptees",
+        "Les objectifs de vente, de fidelisation et d'accroissement de la valeur client sont atteints",
+        "La communication est mise en oeuvre au service de l'efficacite relationnelle"
+      ]
+    },
+    {
+      "bloc_code": "DC2",
+      "intitule": "Animer et dynamiser l'offre commerciale",
+      "competences": [
+        "Elaborer et adapter en continu l'offre de produits et de services (analyser la demande, analyser l'offre existante, construire et/ou adapter l'offre de l'unite commerciale)",
+        "Organiser l'espace commercial (agencer l'espace, garantir la disponibilite de l'offre, maintenir un espace operationnel et attractif, respecter les preconisations et regles d'hygiene et de securite)",
+        "Developper les performances de l'espace commercial (mettre en valeur les produits, optimiser l'implantation de l'offre, proposer et organiser des animations et operations promotionnelles)",
+        "Concevoir et mettre en place la communication commerciale (communication sur le lieu de vente, communication externe, reseaux sociaux et outils numeriques)",
+        "Evaluer l'action commerciale (analyser l'impact des actions mises en oeuvre, proposer des axes d'amelioration ou de developpement)"
+      ],
+      "savoirs_associes": [
+        "Le cadre economique, legal et reglementaire de l'animation et de la dynamisation de l'offre",
+        "Le marche et ses composantes",
+        "Les unites commerciales et l'omnicanalite",
+        "L'offre de produits et services, la marque et les signes de qualite",
+        "Les relations producteurs/distributeurs",
+        "Le marchandisage et l'e-merchandising",
+        "L'animation commerciale et les actions promotionnelles",
+        "La communication de l'unite commerciale"
+      ],
+      "criteres_evaluation": [
+        "L'analyse de la demande et de l'offre est pertinente",
+        "L'offre proposee est adaptee aux caracteristiques locales et coherente avec la politique commerciale de l'enseigne",
+        "L'agencement de l'espace commercial facilite le travail du personnel et le confort d'achat des clients",
+        "La reglementation, les regles d'hygiene et de securite sont respectees",
+        "Les propositions d'animations et d'operations promotionnelles sont coherentes avec le contexte local",
+        "Le choix des outils et des messages de communication est approprie",
+        "Les retombees de la communication commerciale et les performances d'implantation sont analysees",
+        "Les propositions d'axes d'amelioration tiennent compte des realites locales et nationales"
+      ]
+    },
+    {
+      "bloc_code": "DC3",
+      "intitule": "Assurer la gestion operationnelle",
+      "competences": [
+        "Gerer les operations courantes (garantir les approvisionnements, gerer les stocks, suivre les reglements et la tresorerie, fixer les prix, gerer les risques)",
+        "Prevoir et budgetiser l'activite (fixer des objectifs commerciaux, elaborer des budgets, participer aux decisions d'investissement)",
+        "Analyser les performances (concevoir et analyser un tableau de bord, analyser la rentabilite, exploiter et enrichir le systeme d'information commercial, proposer des mesures correctrices, rendre compte)"
+      ],
+      "savoirs_associes": [
+        "Le cadre juridique des operations de gestion et le cycle d'exploitation",
+        "Les documents commerciaux et les operations de reglement",
+        "Les stocks et les approvisionnements",
+        "Le financement de l'exploitation et la tresorerie",
+        "Le compte de resultat, les couts et les marges",
+        "La fixation des prix",
+        "Le bilan et la gestion des risques",
+        "Les methodes de prevision des ventes, les budgets",
+        "Le financement de l'investissement et les criteres de choix d'investissement",
+        "Les indicateurs de performance, la rentabilite de l'activite, le reporting"
+      ],
+      "criteres_evaluation": [
+        "Les contraintes legales et reglementaires sont respectees",
+        "Les approvisionnements sont assures et optimises, le suivi des stocks est rigoureux",
+        "Les calculs de tresorerie sont justes et les propositions de prix realistes",
+        "Les risques sont anticipes et le traitement des incidents est efficace",
+        "Les objectifs fixes sont realistes, les budgets fiables et operationnels",
+        "Les propositions de decision d'investissement sont pertinentes",
+        "Les tableaux de bord sont operationnels et les donnees quantitatives judicieusement mobilisees",
+        "Les comptes rendus sont adaptes et exploitables, les mesures correctrices coherentes"
+      ]
+    },
+    {
+      "bloc_code": "DC4",
+      "intitule": "Manager l'equipe commerciale",
+      "competences": [
+        "Organiser le travail de l'equipe commerciale (recenser les ressources disponibles et les besoins, repartir les taches, realiser les plannings, respecter la legislation)",
+        "Recruter des collaborateurs (evaluer les besoins en competences et en personnel, participer au recrutement, conduire un entretien de recrutement, integrer les nouveaux arrivants)",
+        "Animer l'equipe commerciale (transmettre et expliquer les informations, conduire une reunion ou un entretien, favoriser l'implication, accompagner et motiver l'equipe, gerer les conflits et les risques psycho-sociaux)",
+        "Evaluer les performances de l'equipe commerciale (concevoir et analyser un tableau de bord de suivi d'equipe, mesurer et analyser les performances individuelles et collectives, proposer des actions d'accompagnement)"
+      ],
+      "savoirs_associes": [
+        "Le cadre legal et reglementaire de l'activite (conventions collectives, reglement interieur)",
+        "La planification du travail et l'ordonnancement des taches",
+        "Le recrutement de l'equipe commerciale",
+        "La communication manageriale",
+        "L'animation de l'equipe commerciale",
+        "La remuneration et la stimulation de l'equipe commerciale",
+        "La formation de l'equipe commerciale",
+        "La gestion des conflits, des risques psycho-sociaux et de crise",
+        "Les performances individuelles et collectives"
+      ],
+      "criteres_evaluation": [
+        "Les contraintes legales et reglementaires sont respectees",
+        "La repartition des taches est rationnelle et les plannings operationnels",
+        "Le recrutement est adapte aux besoins et les nouveaux collaborateurs sont integres",
+        "Les objectifs des reunions et des entretiens sont atteints",
+        "Les techniques d'animation et les outils de stimulation sont maitrises et mis en oeuvre a bon escient",
+        "Les besoins en formation sont correctement reperes et la demarche de formation est efficace",
+        "Les conflits, les risques psycho-sociaux et les situations de crise sont prevenus et/ou efficacement regles",
+        "La mesure et l'analyse des performances individuelles et collectives sont pertinentes",
+        "La communication est mise en oeuvre au service de l'efficacite manageriale"
+      ]
+    }
+  ],
+  "instructions": "3. DEROULEMENT DE L'ENTRETIEN\nL'entretien vise a verifier que le candidat a reellement exerce, en situation professionnelle, les activites correspondant aux 4 blocs de competences du BTS MCO (DC1 a DC4).\n\nMode APPRENTISSAGE :\n- Tu poses des questions plus simples et progressives, tu peux reformuler si le candidat est en difficulte, et tu donnes de courts retours pedagogiques a la fin de chaque grande partie.\n- L'objectif est de preparer le candidat a l'epreuve reelle, pas de le sanctionner.\n\nMode SIMULATION :\n- Tu reproduis les conditions reelles d'un entretien de jury VAE : pas de retour pendant l'entretien, questions posees comme devant un jury officiel.\n- Tu couvres les 4 blocs de competences de maniere equilibree sur la duree impartie (duree_simulation).\n- Tu varies les formats de question : mise en situation concrete, demande d'exemple chiffre ou factuel, question de clarification sur une methode ou un outil utilise.\n- Tu cloture l'entretien une fois les 4 blocs abordes ou le temps imparti atteint, en remerciant sobrement le candidat, sans donner de verdict.\n\nConsignes generales :\n- Une question a la fois, jamais plusieurs questions groupees.\n- Tu attends la reponse complete du candidat avant de relancer ou de passer au point suivant.\n- Tu restes dans le champ du referentiel BTS MCO ; tu ne poses pas de questions hors-sujet.\n- A la fin de la simulation, une synthese peut etre generee separement par l'application ; tu n'as pas a la produire toi-meme pendant l'oral."
+}

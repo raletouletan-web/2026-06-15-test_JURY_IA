@@ -33,14 +33,111 @@ const METIERS: { id: string; titre: string; diplome: string }[] = [
   // ── Ajouter ici les autres métiers au fur et à mesure ──
 ];
 
+type Categorie = {
+  id: string;
+  titre: string;
+  description: string;
+  icon: string;
+  metiers: string[]; // doit correspondre aux id de METIERS
+};
+
+const CATEGORIES: Categorie[] = [
+  {
+    id: "petite-enfance-social",
+    titre: "Petite Enfance & Social",
+    description: "CAP AEPE, DEEJE, DEES, DEME...",
+    icon: "🧸",
+    metiers: [
+      "accompagnant-educatif-petite-enfance",
+      "educateur-jeunes-enfants",
+      "educateur-specialise",
+      "moniteur-educateur",
+    ],
+  },
+  {
+    id: "sanitaire-paramedical",
+    titre: "Sanitaire & Paramédical",
+    description: "Aide-Soignant, Auxiliaire de Puériculture...",
+    icon: "🩺",
+    metiers: ["aide-soignant", "auxiliaire-de-puericulture"],
+  },
+  {
+    id: "commerce-vente",
+    titre: "Commerce & Vente",
+    description: "BTS MCO, NDRC, Licence Pro Commerce...",
+    icon: "🛍️",
+    metiers: [],
+  },
+  {
+    id: "ressources-humaines-paie",
+    titre: "Ressources Humaines & Paie",
+    description: "Titre RH, Gestionnaire de Paie, Master RH...",
+    icon: "👥",
+    metiers: [],
+  },
+  {
+    id: "management-direction",
+    titre: "Management & Direction",
+    description: "MBA, Direction d'établissement, Chef de projet...",
+    icon: "💼",
+    metiers: [],
+  },
+  {
+    id: "informatique-digital",
+    titre: "Informatique & Digital",
+    description: "Concepteur Développeur, RSSI, Chef d'équipe...",
+    icon: "💻",
+    metiers: [],
+  },
+  {
+    id: "comptabilite-gestion",
+    titre: "Comptabilité & Gestion",
+    description: "DCG, DSCG, Assistant Comptable...",
+    icon: "🧮",
+    metiers: [],
+  },
+  {
+    id: "immobilier-notariat",
+    titre: "Immobilier & Notariat",
+    description: "BTS PI, Négociateur, Gestionnaire de biens...",
+    icon: "🏢",
+    metiers: [],
+  },
+  {
+    id: "logistique-transport",
+    titre: "Logistique & Transport",
+    description: "Supply Chain, BTS GTLA...",
+    icon: "🚚",
+    metiers: [],
+  },
+  {
+    id: "hotellerie-restauration",
+    titre: "Hôtellerie & Restauration",
+    description: "BTS MHR, Chef de Cuisine, Maître d'Hôtel...",
+    icon: "🍽️",
+    metiers: [],
+  },
+  {
+    id: "industrie-ingenierie",
+    titre: "Industrie & Ingénierie",
+    description: "Maintenance, Ingénieur Cnam...",
+    icon: "⚙️",
+    metiers: [],
+  },
+  {
+    id: "sport-animation",
+    titre: "Sport & Animation",
+    description: "BPJEPS, DEJEPS, Licence STAPS...",
+    icon: "🤸",
+    metiers: [],
+  },
+  // ── Ajouter ici les futures catégories (Commerce & Vente, RH & Paie, etc.) ──
+];
+
 const WEBRTC_URL = "https://api.openai.com/v1/realtime/calls";
 const MODEL      = "gpt-realtime";
 
-// ── Token lu depuis l'URL — vérification réelle faite côté server.js ──
-function getTokenFromURL(): string | null {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("token");
-}
+// ── L'accès est désormais géré par cookie de session (voir /api/auth/*) ──
 
 // Les instructions sont chargées dynamiquement depuis le référentiel choisi
 const INSTRUCTIONS_PLACEHOLDER = `LANGUE : Tu DOIS parler UNIQUEMENT en français. Toutes tes réponses, questions et commentaires sont exclusivement en français. Ne parle jamais en anglais ni dans aucune autre langue.
@@ -149,8 +246,65 @@ export default function App() {
   const [questionNum, setQuestionNum] = useState(0);
   const [synthesis,   setSynthesis]   = useState<string | null>(null);
   const [metierSelectionne, setMetierSelectionne] = useState<string | null>(null);
+  const [categorieSelectionnee, setCategorieSelectionnee] = useState<string | null>(null);
   const [referentiel, setReferentiel] = useState<Referentiel | null>(null);
   const [loadingMetier, setLoadingMetier] = useState(false);
+
+  // ── Authentification par lien magique (email) ──
+  const [authChecked, setAuthChecked] = useState(false);
+  const [authEmail, setAuthEmail] = useState<string | null>(null);
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginStatus, setLoginStatus] = useState<"idle" | "envoi" | "envoye" | "erreur">("idle");
+  const [loginErrorMsg, setLoginErrorMsg] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Si on arrive avec ?erreur=lien_expire (redirection depuis /api/auth/verify), on l'affiche
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("erreur") === "lien_expire") {
+      setLoginStatus("erreur");
+      setLoginErrorMsg("Ce lien de connexion a expiré ou est invalide. Merci de redemander un nouveau lien.");
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+
+    fetch("/api/auth/me", { credentials: "same-origin" })
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.connecte) setAuthEmail(data.email);
+      })
+      .catch(() => {})
+      .finally(() => setAuthChecked(true));
+  }, []);
+
+  const demanderLienConnexion = async () => {
+    if (!loginEmail || loginStatus === "envoi") return;
+    setLoginStatus("envoi");
+    setLoginErrorMsg(null);
+    try {
+      const res = await fetch("/api/auth/request-link", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({ email: loginEmail.trim() }),
+      });
+      if (!res.ok) throw new Error("Erreur lors de l'envoi.");
+      setLoginStatus("envoye");
+    } catch (err) {
+      setLoginStatus("erreur");
+      setLoginErrorMsg("Une erreur est survenue. Merci de réessayer dans quelques instants.");
+    }
+  };
+
+  const deconnecter = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST", credentials: "same-origin" });
+    } catch {}
+    setAuthEmail(null);
+    setLoginEmail("");
+    setLoginStatus("idle");
+    setMetierSelectionne(null);
+    setCategorieSelectionnee(null);
+    setReferentiel(null);
+  };
 
   const synthesisStartedRef  = useRef(false);
   const synthesisFinishedRef = useRef(false);
@@ -447,7 +601,7 @@ export default function App() {
     try {
       setStatus("connecting");
 
-      const sessionRes = await fetch(`/api/session?token=${encodeURIComponent(token ?? "")}&metier=${encodeURIComponent(metierSelectionne ?? "")}`);
+      const sessionRes = await fetch(`/api/session?metier=${encodeURIComponent(metierSelectionne ?? "")}`, { credentials: "same-origin" });
       if (!sessionRes.ok) {
         const body = await sessionRes.json().catch(() => ({}));
         throw new Error(body.error || body.detail || `Erreur serveur ${sessionRes.status}`);
@@ -552,13 +706,83 @@ export default function App() {
     sendEvent({ type: "response.cancel" });
   };
 
-  // ── Token récupéré depuis l'URL (vérification faite par server.js) ──
-  const token = getTokenFromURL();
+  // ── L'accès est désormais géré par cookie de session (voir /api/auth/*) ──
 
   const modeLabel = mode === "apprentissage" ? "Mode Apprentissage" : mode === "simulation" ? "Mode Simulation" : null;
   const modeBadgeColor = mode === "apprentissage" ? "bg-blue-50 border-blue-200 text-blue-700" : mode === "simulation" ? "bg-amber-50 border-amber-200 text-amber-700" : "";
   const statusLabel = isConnecting ? "Connexion en cours…" : isConnected ? isSpeaking ? "Le jury s'exprime…" : isListening ? "À vous la parole" : mode ? "En attente de votre réponse" : "Choisissez votre mode" : referentiel ? `Prêt pour votre oral — ${referentiel.titre}` : "Choisissez votre métier";
 
+
+  // ── Écran de chargement pendant la vérification de la session ──
+  if (!authChecked) {
+    return (
+      <div className="min-h-screen bg-[#f7f5f1] flex items-center justify-center">
+        <div className="h-8 w-8 border-2 border-[#5f6452] border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  // ── Écran de connexion par lien magique (si aucune session valide) ──
+  if (!authEmail) {
+    return (
+      <div className="min-h-screen bg-[#f7f5f1] text-[#2b2e27] flex items-center justify-center px-4">
+        <div className="w-full max-w-sm">
+          <div className="flex items-center gap-3 mb-8 justify-center">
+            <div className="h-10 w-10 rounded-lg bg-[#5f6452] flex items-center justify-center shadow-sm">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l7 4v6c0 5-3.5 9.5-7 10-3.5-.5-7-5-7-10V6l7-4z" stroke="white" strokeWidth="1.6" fill="white" fillOpacity="0.2"/>
+                <path d="M9 12l2 2 4-4" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>
+              </svg>
+            </div>
+            <div className="font-serif text-[19px] italic tracking-tight">
+              Jury IA <span className="font-medium not-italic">VAE</span>
+            </div>
+          </div>
+
+          {loginStatus === "envoye" ? (
+            <div className="text-center rounded-xl border border-[#e0dbd0] bg-white px-6 py-8">
+              <div className="text-[15px] font-semibold text-[#2b2e27] mb-2">Vérifiez votre boîte mail</div>
+              <div className="text-[13px] text-[#7a7f6f]">
+                Un lien de connexion vient d'être envoyé à<br /><span className="font-medium text-[#2b2e27]">{loginEmail}</span>.
+                <br />Il est valable 15 minutes.
+              </div>
+              <button
+                onClick={() => setLoginStatus("idle")}
+                className="mt-5 text-[12px] font-semibold text-[#8a8f7d] hover:text-[#5f6452]"
+              >
+                Utiliser une autre adresse email
+              </button>
+            </div>
+          ) : (
+            <div className="rounded-xl border border-[#e0dbd0] bg-white px-6 py-8">
+              <p className="text-[13px] text-[#7a7f6f] mb-4 text-center">
+                Entrez l'adresse email associée à votre compte pour recevoir votre lien de connexion.
+              </p>
+              <input
+                type="email"
+                value={loginEmail}
+                onChange={(e) => setLoginEmail(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && demanderLienConnexion()}
+                placeholder="votre@email.com"
+                className="w-full rounded-lg border border-[#e0dbd0] px-4 py-2.5 text-[14px] mb-3 focus:outline-none focus:border-[#5f6452]"
+                autoFocus
+              />
+              {loginStatus === "erreur" && loginErrorMsg && (
+                <div className="text-[12px] text-red-600 mb-3">{loginErrorMsg}</div>
+              )}
+              <button
+                onClick={demanderLienConnexion}
+                disabled={!loginEmail || loginStatus === "envoi"}
+                className="w-full rounded-lg bg-[#5f6452] text-white text-[14px] font-semibold py-2.5 hover:bg-[#4d5142] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                {loginStatus === "envoi" ? "Envoi en cours…" : "Recevoir mon lien de connexion"}
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#f7f5f1] text-[#2b2e27] flex flex-col">
@@ -595,9 +819,16 @@ export default function App() {
                 {isConnected ? "CONNECTÉ" : isConnecting ? "CONNEXION…" : "DÉCONNECTÉ"}
               </span>
             </div>
-            <div className="rounded-full border border-[#e0dbd0] bg-white px-3 py-1.5 text-[10px] sm:text-[11px] font-medium text-[#4a4e42] shadow-sm whitespace-nowrap">
-              PATRICE DIAKITÉ
+            <div className="hidden sm:flex items-center gap-1.5 rounded-full border border-[#e0dbd0] bg-white px-3 py-1.5 text-[10px] sm:text-[11px] font-medium text-[#4a4e42] shadow-sm whitespace-nowrap">
+              {authEmail}
             </div>
+            <button
+              onClick={deconnecter}
+              className="text-[11px] font-semibold text-[#8a8f7d] hover:text-[#5f6452] px-2"
+              title="Se déconnecter"
+            >
+              Déconnexion
+            </button>
           </div>
         </div>
         {isConnected && (
@@ -660,7 +891,7 @@ export default function App() {
             <h1 className="mt-8 font-serif text-[26px] sm:text-[32px] md:text-[36px] leading-tight italic text-[#2f332a]">{statusLabel}</h1>
 
             <p className="mt-3 max-w-[500px] text-[14px] sm:text-[15px] leading-relaxed text-[#6f7566]">
-              {isConnected ? mode ? "Parlez naturellement en français. Attendez que le jury ait terminé avant de répondre." : "Dites MODE APPRENTISSAGE ou MODE SIMULATION pour commencer." : referentiel ? "Cliquez sur le bouton ci-dessous pour démarrer la simulation. Assurez-vous d'être dans un environnement calme et d'avoir autorisé l'accès à votre microphone." : "Sélectionnez votre métier pour commencer."}
+              {isConnected ? mode ? "Parlez naturellement en français. Attendez que le jury ait terminé avant de répondre." : "Dites MODE APPRENTISSAGE ou MODE SIMULATION pour commencer." : referentiel ? "Cliquez sur le bouton ci-dessous pour démarrer la simulation. Assurez-vous d'être dans un environnement calme et d'avoir autorisé l'accès à votre microphone." : categorieSelectionnee ? "Sélectionnez votre métier pour commencer." : "Choisissez votre domaine, puis votre métier, pour commencer."}
             </p>
 
             {errorMsg && (
@@ -671,25 +902,76 @@ export default function App() {
 
             {!isConnected && !isConnecting && !referentiel && (
               <div className="mt-8 w-full max-w-sm">
-                <p className="text-[13px] text-[#8a8f7d] mb-4 uppercase tracking-widest font-semibold">Sélectionnez votre métier</p>
-                <div className="space-y-2">
-                  {METIERS.map((m) => (
+                {!categorieSelectionnee ? (
+                  <>
+                    <p className="text-[13px] text-[#8a8f7d] mb-4 uppercase tracking-widest font-semibold">Choisissez un domaine</p>
+                    <div className="space-y-2">
+                      {CATEGORIES.map((cat) => {
+                        const disponible = cat.metiers.length > 0;
+                        return (
+                          <button
+                            key={cat.id}
+                            onClick={() => disponible && setCategorieSelectionnee(cat.id)}
+                            disabled={!disponible}
+                            className={`w-full flex items-center justify-between rounded-xl border px-5 py-3.5 text-left transition-all duration-150 group ${
+                              disponible
+                                ? "border-[#e0dbd0] bg-white hover:bg-[#f3f2ee] hover:border-[#5f6452] cursor-pointer"
+                                : "border-[#ebe6db] bg-[#faf9f6] cursor-not-allowed opacity-60"
+                            }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <span className="text-[20px]">{cat.icon}</span>
+                              <div>
+                                <div className={`text-[14px] font-semibold ${disponible ? "text-[#2b2e27] group-hover:text-[#5f6452]" : "text-[#8a8f7d]"}`}>{cat.titre}</div>
+                                <div className="text-[11px] text-[#9a9f8d] mt-0.5">{cat.description}</div>
+                              </div>
+                            </div>
+                            {disponible ? (
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a9f8d" strokeWidth="2" className="group-hover:stroke-[#5f6452] flex-shrink-0">
+                                <path d="M9 18l6-6-6-6"/>
+                              </svg>
+                            ) : (
+                              <span className="flex-shrink-0 text-[10px] font-semibold text-[#a89a6f] bg-[#f3ecd8] px-2 py-1 rounded-full whitespace-nowrap ml-2">Bientôt disponible</span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                ) : (
+                  <>
                     <button
-                      key={m.id}
-                      onClick={() => chargerReferentiel(m.id)}
-                      disabled={loadingMetier}
-                      className="w-full flex items-center justify-between rounded-xl border border-[#e0dbd0] bg-white px-5 py-3.5 text-left hover:bg-[#f3f2ee] hover:border-[#5f6452] transition-all duration-150 group"
+                      onClick={() => setCategorieSelectionnee(null)}
+                      className="flex items-center gap-1.5 text-[12px] font-semibold text-[#8a8f7d] hover:text-[#5f6452] mb-4"
                     >
-                      <div>
-                        <div className="text-[14px] font-semibold text-[#2b2e27] group-hover:text-[#5f6452]">{m.titre}</div>
-                        <div className="text-[11px] text-[#9a9f8d] mt-0.5">{m.diplome}</div>
-                      </div>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a9f8d" strokeWidth="2" className="group-hover:stroke-[#5f6452]">
-                        <path d="M9 18l6-6-6-6"/>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M15 18l-6-6 6-6"/>
                       </svg>
+                      Retour aux domaines
                     </button>
-                  ))}
-                </div>
+                    <p className="text-[13px] text-[#8a8f7d] mb-4 uppercase tracking-widest font-semibold">Sélectionnez votre métier</p>
+                    <div className="space-y-2">
+                      {METIERS
+                        .filter((m) => CATEGORIES.find((c) => c.id === categorieSelectionnee)?.metiers.includes(m.id))
+                        .map((m) => (
+                          <button
+                            key={m.id}
+                            onClick={() => chargerReferentiel(m.id)}
+                            disabled={loadingMetier}
+                            className="w-full flex items-center justify-between rounded-xl border border-[#e0dbd0] bg-white px-5 py-3.5 text-left hover:bg-[#f3f2ee] hover:border-[#5f6452] transition-all duration-150 group"
+                          >
+                            <div>
+                              <div className="text-[14px] font-semibold text-[#2b2e27] group-hover:text-[#5f6452]">{m.titre}</div>
+                              <div className="text-[11px] text-[#9a9f8d] mt-0.5">{m.diplome}</div>
+                            </div>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a9f8d" strokeWidth="2" className="group-hover:stroke-[#5f6452]">
+                              <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                          </button>
+                        ))}
+                    </div>
+                  </>
+                )}
               </div>
             )}
 
