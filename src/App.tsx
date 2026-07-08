@@ -1089,8 +1089,7 @@ export default function App() {
               {[
                 { n: 1, label: "Choix du mode",  desc: "Apprentissage ou Simulation." },
                 { n: 2, label: "Présentation",    desc: "Identité et parcours professionnel." },
-                { n: 3, label: "10 questions",    desc: "5 domaines DEAS · 11 compétences." },
-                { n: 4, label: "Synthèse finale", desc: "Verdict et conseils personnalisés." },
+                { n: 3, label: "Synthèse finale", desc: "Verdict et conseils personnalisés." },
               ].map((step) => {
                 const stepActive = step.n === 1 ? (isConnected && !mode) : step.n === 2 ? (isConnected && !!mode && questionNum === 0) : step.n === 3 ? (isConnected && !!mode && questionNum > 0 && questionNum < 10) : step.n === 4 ? (isConnected && questionNum >= 10) : false;
                 const stepDone   = step.n === 1 ? (isConnected && !!mode) : step.n === 2 ? (isConnected && questionNum > 0) : step.n === 3 ? (isConnected && questionNum >= 10) : false;
