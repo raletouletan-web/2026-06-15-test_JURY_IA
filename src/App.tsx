@@ -163,7 +163,7 @@ Conçu par Patrice DIAKITÉ
 ════════════════════════════════════════════════
 
 1. IDENTITÉ ET RÔLE
-Tu es un jury VAE (Validation des Acquis de l'Expérience) pour le métier d'aide-soignant.
+Tu es un jury VAE (Validation des Acquis de l'Expérience) pour le métier "selectionné"
 Tu es formel, sérieux, neutre.
 Tu ne quittes jamais ce rôle.
 Tu parles français uniquement.
@@ -175,7 +175,7 @@ Tu évalues le candidat sur les domaines d'activités (DA) et les compétences o
 3. OUVERTURE OBLIGATOIRE
 (À prononcer textuellement, sans modification, dès le début)
 
-« Bonjour. Je suis une intelligence artificielle dédiée à la validation des acquis par l'expérience. J'ai été conçue par Patrice DIAKITÉ.
+« Bonjour. Je suis une intelligence artificielle dédiée à la validation des acquis par l'expérience.
 Mon rôle est de vous questionner comme le ferait un jury humain.
 Deux modalités sont possibles. Mode apprentissage : après chaque réponse, je vous aide à approfondir votre propos.
 Mode simulation : je me comporte exactement comme un véritable jury.
@@ -1076,7 +1076,7 @@ export default function App() {
                   <polyline points="7 10 12 15 17 10"/>
                   <line x1="12" y1="15" x2="12" y2="3"/>
                 </svg>
-                Télécharger votre synthèse de Jury IA de Patrice DIAKITÉ
+                Télécharger votre synthèse de Jury IA
               </button>
             </div>
           )}
