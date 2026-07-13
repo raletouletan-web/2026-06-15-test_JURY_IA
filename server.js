@@ -283,7 +283,7 @@ app.get("/api/session", async (req, res) => {
       "",
       commun.analyse_continue,
       "",
-      commun.synthese_finale,
+      commun.cloture_entretien,
     ].join("\n");
   } catch (err) {
     console.error("❌ Erreur chargement référentiels:", err);
