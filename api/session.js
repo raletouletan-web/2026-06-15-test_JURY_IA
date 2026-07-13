@@ -101,6 +101,8 @@ export default async function handler(req, res) {
       "",
       referentiel.referentiel_evaluation,
       "",
+      commun.methodologie_questionnement,
+      "",
       "3. OUVERTURE OBLIGATOIRE\n(À prononcer textuellement, sans modification, dès le début)\n\n" + commun.ouverture_template,
       "",
       "4. FONCTIONNEMENT PAR MODE\n\n" + remplir(commun.fonctionnement_modes, referentiel),
