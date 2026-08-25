@@ -43,6 +43,7 @@ const METIERS: { id: string; titre: string; diplome: string }[] = [
      { id: "bts-ms", titre: "bts-ms", diplome: "BTS Maintenance des Systèmes" },
      { id: "bpjeps-asec", titre: "bpjeps-asec", diplome: "BPJEPS - Mention Animation Socio-éducative ou Culturelle" },
      { id: "accompagnant-educatif-et-social", titre: "Accompagnant Educatif et Social", diplome: "DEAES" },
+  { id: "assistant-socio-educatif-cig-grande-couronne", titre: "assistant-socio-educatif-cig-grande-couronne", diplome: "Assistant territorial socio-educatif" },
   // ── Ajouter ici les autres métiers au fur et à mesure ──
 ];
 
@@ -65,6 +66,7 @@ const CATEGORIES: Categorie[] = [
       "educateur-jeunes-enfants",
       "educateur-specialise",
       "moniteur-educateur",
+      "assistant-socio-educatif-cig-grande-couronne"
     ],
   },
   {
