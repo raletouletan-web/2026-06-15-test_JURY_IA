@@ -42,7 +42,7 @@ const METIERS: { id: string; titre: string; diplome: string }[] = [
      { id: "bts-crci", titre: "bts-crci", diplome: "BTS Conception et Réalisation en Chaudronnerie Industrielle" },
      { id: "bts-ms", titre: "bts-ms", diplome: "BTS Maintenance des Systèmes" },
      { id: "bpjeps-asec", titre: "bpjeps-asec", diplome: "BPJEPS - Mention Animation Socio-éducative ou Culturelle" },
-     { id: "Accompagnant-Educatif-et-Social", titre: "Accompagnant Educatif et Social", diplome: "DEAES" },
+     { id: "accompagnant-educatif-et-social", titre: "Accompagnant Educatif et Social", diplome: "DEAES" },
   // ── Ajouter ici les autres métiers au fur et à mesure ──
 ];
 
@@ -72,7 +72,7 @@ const CATEGORIES: Categorie[] = [
     titre: "Sanitaire & Paramédical",
     description: "Aide-Soignant, Auxiliaire de Puériculture, Accompagnant Educatif et Social...",
     icon: "🩺",
-    metiers: ["aide-soignant", "auxiliaire-de-puericulture","Accompagnant Educatif et Social"],
+    metiers: ["aide-soignant", "auxiliaire-de-puericulture","accompagnant-educatif-et-social"],
   },
   {
     id: "commerce-vente",
@@ -93,7 +93,7 @@ const CATEGORIES: Categorie[] = [
     titre: "Management & Direction",
     description: "BTS SAM, Direction d'établissement, Chef de projet...",
     icon: "💼",
-    metiers: ["BTS Support à l'Action Managériale"],
+    metiers: ["bts-sam"],
   },
   {
     id: "informatique-digital",
