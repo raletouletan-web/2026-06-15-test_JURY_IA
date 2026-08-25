@@ -42,7 +42,7 @@ const METIERS: { id: string; titre: string; diplome: string }[] = [
      { id: "bts-crci", titre: "bts-crci", diplome: "BTS Conception et Réalisation en Chaudronnerie Industrielle" },
      { id: "bts-ms", titre: "bts-ms", diplome: "BTS Maintenance des Systèmes" },
      { id: "bpjeps-asec", titre: "bpjeps-asec", diplome: "BPJEPS - Mention Animation Socio-éducative ou Culturelle" },
-     { id: "Accompagnant-Educatif-et-Social", titre: "Accompagnant Educatif et Social", diplome: "Accompagnant Educatif et Social" },
+     { id: "Accompagnant-Educatif-et-Social", titre: "Accompagnant Educatif et Social", diplome: "DEAES" },
   // ── Ajouter ici les autres métiers au fur et à mesure ──
 ];
 
