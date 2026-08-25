@@ -42,7 +42,7 @@ const METIERS: { id: string; titre: string; diplome: string }[] = [
      { id: "bts-crci", titre: "bts-crci", diplome: "BTS Conception et Réalisation en Chaudronnerie Industrielle" },
      { id: "bts-ms", titre: "bts-ms", diplome: "BTS Maintenance des Systèmes" },
      { id: "bpjeps-asec", titre: "bpjeps-asec", diplome: "BPJEPS - Mention Animation Socio-éducative ou Culturelle" },
-  
+     { id: "bpjeps-asec", titre: "Accompagnant Educatif et Social", diplome: "Accompagnant Educatif et Social" },
   // ── Ajouter ici les autres métiers au fur et à mesure ──
 ];
 
@@ -70,9 +70,9 @@ const CATEGORIES: Categorie[] = [
   {
     id: "sanitaire-paramedical",
     titre: "Sanitaire & Paramédical",
-    description: "Aide-Soignant, Auxiliaire de Puériculture...",
+    description: "Aide-Soignant, Auxiliaire de Puériculture, Accompagnant Educatif et Social...",
     icon: "🩺",
-    metiers: ["aide-soignant", "auxiliaire-de-puericulture"],
+    metiers: ["aide-soignant", "auxiliaire-de-puericulture","Accompagnant Educatif et Social"],
   },
   {
     id: "commerce-vente",
