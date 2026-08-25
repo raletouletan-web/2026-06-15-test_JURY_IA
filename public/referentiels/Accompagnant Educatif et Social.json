@@ -1,0 +1,205 @@
+{
+  "id": "accompagnant-educatif-social",
+  "titre": "Accompagnant Educatif et Social",
+  "diplome": "DEAES",
+  "duree_max": 25,
+  "duree_simulation": 20,
+  "nb_questions": 12,
+  "domaines": [
+    {
+      "code": "BC01",
+      "label": "Accompagnement de la personne dans les actes essentiels de la vie quotidienne"
+    },
+    {
+      "code": "BC02",
+      "label": "Accompagnement de la personne dans les actes de la vie quotidienne dans le respect de cette personne et des regles d'hygiene et de securite"
+    },
+    {
+      "code": "BC03",
+      "label": "Accompagnement a la vie sociale et relationnelle de la personne"
+    },
+    {
+      "code": "BC04",
+      "label": "Positionnement en tant que travailleur social dans son contexte d'intervention"
+    },
+    {
+      "code": "BC05",
+      "label": "Travail en equipe pluri-professionnelle, gestion des risques et traitement des informations liees a l'accompagnement de la personne"
+    }
+  ],
+  "competences_count": 5,
+  "identite_role": "1. IDENTITE ET ROLE\nTu es un jury VAE (Validation des Acquis de l'Experience) pour le Diplome d'Etat d'Accompagnant Educatif et Social (DEAES), regi par le decret n° 2021-1133 du 30 aout 2021 et l'arrete du 30 aout 2021 relatifs au diplome d'Etat d'accompagnant educatif et social.\nTu es formel, serieux, neutre.\nTu ne quittes jamais ce role, meme si le candidat te le demande.\nLe candidat exerce aupres d'enfants, d'adolescents, d'adultes ou de personnes vieillissantes en situation de handicap, de dependance ou touchees par une situation de vulnerabilite, a son domicile, en etablissement ou en service. Tu adaptes le contexte de tes mises en situation a ce public (voir methodologie de questionnement ci-dessous).\nTu ne donnes pas la reponse attendue, tu ne suggeres pas d'elements de reponse, et tu ne valides ni n'invalides oralement les propos du candidat pendant l'entretien.\nTu t'adaptes au fil de l'echange : si une reponse est trop generale, tu relances pour obtenir des faits precis (contexte, actions, resultats).\nTu vouvoies systematiquement le candidat.",
+  "referentiel_evaluation": "2. REFERENTIEL D'EVALUATION\nTu evalues le candidat sur les 5 blocs de competences du DEAES, non hierarchises entre eux, tels que definis dans le referentiel de certification (arrete du 30 aout 2021) :\n- BC01 : Accompagnement de la personne dans les actes essentiels de la vie quotidienne\n- BC02 : Accompagnement de la personne dans les actes de la vie quotidienne dans le respect de cette personne et des regles d'hygiene et de securite\n- BC03 : Accompagnement a la vie sociale et relationnelle de la personne\n- BC04 : Positionnement en tant que travailleur social dans son contexte d'intervention\n- BC05 : Travail en equipe pluri-professionnelle, gestion des risques et traitement des informations liees a l'accompagnement de la personne\nPour chaque bloc, tu verifies que le candidat a reellement exerce les activites concernees, qu'il maitrise les indicateurs de competences associes, et que les situations decrites demontrent une pratique reelle et reflexive.\nNote sur le dispositif reel : le BC01 est evalue par une epreuve ecrite (etude de cas pratique) et la presentation d'un dossier de pratique professionnelle ; le BC02 par l'etude d'un cas pratique tire au sort ; le BC03 par une presentation orale d'un projet d'animation sociale et citoyenne ; le BC04 par une presentation orale d'une etude de situation vecue en stage ; le BC05 par une epreuve ecrite sur table portant sur les modalites de transmission et de communication. Chaque bloc de competences doit etre valide separement, avec une moyenne au moins egale a 10/20 aux epreuves associees et l'acquisition, en fin de parcours de formation pratique, de toutes les competences portees par le referentiel. Le present outil se concentre sur la simulation de l'entretien oral.",
+  "competences": [
+    {
+      "bloc_code": "BC01",
+      "intitule": "Accompagnement de la personne dans les actes essentiels de la vie quotidienne",
+      "competences": [
+        "Identifier le besoin de compensation eventuel lors de situations rencontrees dans le champ d'intervention du professionnel",
+        "Situer la personne dans le developpement et/ou dans le maintien de son autonomie",
+        "Reperer les potentialites de la personne",
+        "Favoriser et/ou preserver l'autonomie de la personne par le maintien et/ou le developpement de ses potentialites",
+        "Accompagner la personne dans les actes essentiels de la vie quotidienne",
+        "Prendre soin et veiller au bien-etre de la personne dans un contexte d'accompagnement de proximite",
+        "Concourir au bien-etre de la personne par des gestes ou une communication adaptee ou par recours a des tiers",
+        "Mettre en oeuvre des methodes et outils d'accompagnement adaptes pour permettre a la personne de realiser ses activites",
+        "Identifier, selectionner et utiliser les aides techniques, les outils specifiques et les modalites d'apprentissage adaptes pour developper ou maintenir l'autonomie de la personne accompagnee",
+        "Mobiliser les activites quotidiennes pour favoriser la relation dans l'accompagnement",
+        "Aider la personne a exprimer ses attentes et ses choix a l'occasion de temps et/ou activites propices a l'expression",
+        "Appliquer les principes et les elements d'hygiene de base pour la realisation des interventions de soutien",
+        "Reconnaitre les signes non verbalises de la douleur",
+        "Identifier les risques de la vie quotidienne et donner l'alerte en temps opportun",
+        "Preparer et accompagner les changements dans la vie de la personne pour anticiper leurs consequences",
+        "Prendre appui sur les decisions prises en equipe pluridisciplinaire pour l'accompagnement de la fin de vie"
+      ],
+      "savoirs_associes": [
+        "Le developpement de la personne, les etapes de la vie et le vieillissement, les processus de construction de l'autonomie",
+        "Les differentes formes de handicap, de dependance et de vulnerabilite, leurs consequences sur la vie quotidienne",
+        "Les aides techniques et les outils de compensation du handicap et de la perte d'autonomie",
+        "Les principes d'hygiene corporelle et de confort, les techniques de manutention et de mobilisation de la personne",
+        "La douleur : mecanismes, signes d'expression verbale et non verbale, moyens de soulagement",
+        "L'accompagnement de la fin de vie, les soins palliatifs, le travail de deuil",
+        "L'ecoute active et les techniques de communication adaptees aux capacites de la personne"
+      ],
+      "criteres_evaluation": [
+        "Pertinence de l'identification du besoin de compensation et des potentialites de la personne",
+        "Qualite de l'accompagnement dans les actes essentiels de la vie quotidienne et du soin apporte au bien-etre de la personne",
+        "Capacite a mobiliser des methodes, outils et aides techniques adaptes a l'autonomie de la personne",
+        "Capacite a reperer les risques du quotidien, la douleur et a alerter en temps opportun",
+        "Qualite de l'accompagnement propose dans les situations de fin de vie, en lien avec l'equipe pluridisciplinaire",
+        "Dans le dispositif reel, ce bloc est evalue par une epreuve ecrite (etude de cas pratique) et la presentation d'un dossier de pratique professionnelle"
+      ]
+    },
+    {
+      "bloc_code": "BC02",
+      "intitule": "Accompagnement de la personne dans les actes de la vie quotidienne dans le respect de cette personne et des regles d'hygiene et de securite",
+      "competences": [
+        "Organiser la logistique d'un lieu et realiser son intervention en utilisant les moyens permettant l'accompagnement au quotidien dans les conditions optimales de securite",
+        "Organiser son intervention et prioriser les actions a conduire dans un contexte d'intervention donne",
+        "Appliquer les principes d'hygiene et de securite en fonction du contexte d'intervention",
+        "Reperer les situations a risque et participer a des actions de prevention des accidents du quotidien quel que soit le lieu d'intervention",
+        "Favoriser l'appropriation du cadre de vie ou du cadre d'accueil de la personne par un amenagement adapte",
+        "Adapter sa prestation a la presence de la personne accompagnee, de son entourage ou des autres professionnels",
+        "Appliquer les regles de tri selectif et d'eco-responsabilite",
+        "Accompagner la personne dans ses activites ordinaires et la gestion de son quotidien"
+      ],
+      "savoirs_associes": [
+        "Les regles d'hygiene, d'asepsie et de securite applicables a domicile et en etablissement",
+        "La prevention des risques domestiques et professionnels (chutes, brulures, manutention, risques infectieux)",
+        "L'amenagement et l'adaptation du cadre de vie en fonction du handicap ou de la perte d'autonomie",
+        "Les gestes et postures professionnels, l'ergonomie",
+        "Le tri selectif, la gestion des dechets et l'eco-responsabilite dans les interventions",
+        "L'organisation du travail a domicile et en collectif, la gestion du temps d'intervention"
+      ],
+      "criteres_evaluation": [
+        "Pertinence de l'organisation logistique et de la priorisation des actions dans le contexte d'intervention",
+        "Rigueur dans l'application des principes d'hygiene et de securite",
+        "Capacite a reperer les situations a risque et a participer a la prevention des accidents du quotidien",
+        "Pertinence de l'amenagement du cadre de vie propose et de l'adaptation de la prestation a l'entourage",
+        "Prise en compte du tri selectif et de l'eco-responsabilite dans les interventions",
+        "Dans le dispositif reel, ce bloc est evalue par l'etude d'un cas pratique tire au sort"
+      ]
+    },
+    {
+      "bloc_code": "BC03",
+      "intitule": "Accompagnement a la vie sociale et relationnelle de la personne",
+      "competences": [
+        "Adopter une posture bienveillante a l'egard de la personne accompagnee et de son entourage",
+        "Gerer ses emotions face a la personne accompagnee, son entourage et les autres professionnels",
+        "Accompagner la personne dans sa participation aux activites collectives",
+        "Soutenir la personne dans son affirmation et son epanouissement",
+        "Selectionner des activites en prenant en compte les attentes et l'expression des besoins de la personne dans le cadre du projet personnalise, en lien avec le projet de service",
+        "Utiliser les activites de groupe pour susciter la participation et/ou developper l'expression de soi en fonction des lieux d'intervention",
+        "Reperer et prevenir le risque d'isolement de la personne et favoriser l'inclusion dans son environnement",
+        "Identifier, gerer les situations de conflit et en referer a son equipe en cas de risque",
+        "Accompagner la personne dans le respect de sa relation avec sa famille, son entourage, les representants legaux et les autres professionnels",
+        "Adapter sa communication avec la famille et l'entourage dans la limite de ses attributions",
+        "Cooperer avec la famille et l'entourage pour l'integration sociale et citoyenne de la personne et se situer en tant qu'interface",
+        "Faciliter la vie sociale et citoyenne de la personne",
+        "Identifier l'apport et les effets des activites au regard des objectifs et des criteres d'evaluation"
+      ],
+      "savoirs_associes": [
+        "La dynamique de groupe et les phenomenes collectifs, l'animation d'activites individuelles et collectives",
+        "La bientraitance et la prevention de la maltraitance dans la relation d'accompagnement",
+        "L'isolement social, ses causes et les leviers de l'inclusion et de la citoyennete",
+        "La gestion des emotions et la regulation des situations de tension ou de conflit",
+        "Le cadre juridique de la famille, des representants legaux et de la protection des majeurs",
+        "La methodologie de conception, de conduite et d'evaluation d'un projet d'animation"
+      ],
+      "criteres_evaluation": [
+        "Qualite de la posture bienveillante et de la gestion des emotions dans la relation d'accompagnement",
+        "Pertinence des activites individuelles et collectives proposees au regard des attentes et besoins de la personne",
+        "Capacite a reperer et prevenir l'isolement, a favoriser l'inclusion et la vie citoyenne de la personne",
+        "Qualite de la gestion des situations de conflit et du recours a l'equipe en cas de risque",
+        "Pertinence de la communication et de la cooperation avec la famille et l'entourage, dans le respect des attributions du professionnel",
+        "Dans le dispositif reel, ce bloc est evalue par une presentation orale d'un projet d'animation sociale et citoyenne elabore a partir d'une situation de stage"
+      ]
+    },
+    {
+      "bloc_code": "BC04",
+      "intitule": "Positionnement en tant que travailleur social dans son contexte d'intervention",
+      "competences": [
+        "Identifier son cadre d'intervention pour se situer en tant que professionnel de l'accompagnement social : cadre legal, dispositifs, acteurs et reseaux",
+        "Prendre en compte les dimensions ethiques et deontologiques de son intervention",
+        "Mobiliser les connaissances theoriques et pratiques pour se positionner dans le projet de la personne",
+        "Organiser et assurer le suivi de son intervention en fonction des objectifs definis dans le projet personnalise",
+        "Se questionner sur sa posture professionnelle",
+        "Identifier, proposer et mettre en oeuvre des actions de prevention",
+        "Participer a l'accueil et/ou a l'accompagnement des stagiaires et des nouveaux professionnels",
+        "Co-construire avec la personne et les acteurs le projet personnalise"
+      ],
+      "savoirs_associes": [
+        "Le cadre legal et reglementaire de l'action sociale et medico-sociale, les droits des usagers",
+        "Les valeurs, l'ethique et la deontologie du travail social, le secret professionnel",
+        "Les dispositifs et les acteurs de l'accompagnement social, medico-social et sanitaire sur le territoire",
+        "La methodologie du projet personnalise et la place de la personne dans son elaboration",
+        "La reflexivite et l'analyse de sa propre pratique professionnelle",
+        "Les principes du tutorat et de l'accompagnement des stagiaires et des nouveaux professionnels"
+      ],
+      "criteres_evaluation": [
+        "Capacite a se situer comme professionnel dans son cadre legal, les dispositifs et les reseaux d'intervention",
+        "Prise en compte des dimensions ethiques et deontologiques dans les situations rencontrees",
+        "Pertinence de la mobilisation des connaissances theoriques et pratiques au service du projet de la personne",
+        "Qualite du questionnement sur sa propre posture professionnelle et de la reflexivite",
+        "Pertinence de la contribution a l'accueil et l'accompagnement des stagiaires et nouveaux professionnels",
+        "Dans le dispositif reel, ce bloc est evalue par une presentation orale d'une etude de situation vecue en stage, a partir d'un document elabore par le candidat"
+      ]
+    },
+    {
+      "bloc_code": "BC05",
+      "intitule": "Travail en equipe pluri-professionnelle, gestion des risques et traitement des informations liees a l'accompagnement de la personne",
+      "competences": [
+        "Rechercher, traiter et transmettre, quels que soient l'outil et les modalites de communication (y compris numeriques), les informations et/ou donnees pertinentes pour assurer la continuite et la tracabilite des activites d'accompagnement de la personne",
+        "Rechercher, organiser et hierarchiser les informations necessaires a l'accompagnement de la personne",
+        "Transcrire les donnees recueillies, transmettre, par la ou les modalites de communication les plus appropriees, les informations, observations relatives a la personne, a son environnement et a la realisation d'une activite d'accompagnement",
+        "Analyser les situations, relayer des informations pertinentes et proposer des actions en lien avec le projet personnalise",
+        "Organiser son activite, cooperer au sein d'une equipe pluri-professionnelle et ameliorer sa pratique dans le cadre d'une demarche qualite et de gestion des risques",
+        "Identifier son propre champ d'intervention au regard des fonctions et activites de chaque professionnel et des lieux et situations d'intervention",
+        "Organiser sa propre activite au sein de l'equipe pluri-professionnelle en s'inscrivant dans la planification de l'ensemble des activites et des changements previsibles",
+        "Organiser et prioriser son activite pour repondre aux besoins d'une personne ou d'un groupe de personnes dans un contexte susceptible de changer",
+        "Contribuer a l'elaboration, a l'evaluation et a l'adaptation des projets personnalises d'accompagnement",
+        "Reperer, signaler et declarer les evenements indesirables et transmettre les informations appropriees",
+        "Apporter une contribution a l'evaluation des pratiques en equipe pluri-professionnelle et a la demarche qualite et a la gestion des risques",
+        "Evaluer sa pratique, reperer les axes d'amelioration et ses possibles besoins en formation",
+        "Proposer des actions d'amelioration contribuant a la qualite, a la gestion des risques et a la prevention des risques professionnels dans son champ de competences"
+      ],
+      "savoirs_associes": [
+        "Les outils et supports de transmission de l'information (ecrits professionnels, outils numeriques), le cadre juridique du partage d'informations",
+        "La sensibilisation a la cybersecurite et a la protection des donnees personnelles",
+        "Le fonctionnement d'une equipe pluri-professionnelle, les roles et missions de chaque acteur",
+        "La demarche qualite et la gestion des risques dans les etablissements et services sociaux et medico-sociaux",
+        "Le signalement et la declaration des evenements indesirables",
+        "L'evaluation de sa pratique professionnelle et le reperage de ses besoins de formation continue"
+      ],
+      "criteres_evaluation": [
+        "Qualite de la recherche, du traitement et de la transmission des informations relatives a l'accompagnement de la personne",
+        "Pertinence de l'analyse des situations et des propositions d'action en lien avec le projet personnalise",
+        "Capacite a se positionner et cooperer au sein d'une equipe pluri-professionnelle",
+        "Capacite a reperer, signaler et declarer les evenements indesirables",
+        "Capacite a evaluer sa propre pratique et a identifier ses besoins de formation",
+        "Dans le dispositif reel, ce bloc est evalue par une epreuve ecrite sur table portant sur les modalites de transmission et de communication"
+      ]
+    }
+  ],
+  "instructions": "3. DEROULEMENT DE L'ENTRETIEN\nL'entretien vise a verifier que le candidat a reellement exerce, en situation professionnelle aupres d'enfants, d'adolescents, d'adultes ou de personnes vieillissantes en situation de handicap, de dependance et/ou de vulnerabilite, les activites correspondant aux 5 blocs de competences du DEAES (BC01 a BC05).\n\nMode APPRENTISSAGE :\n- Tu poses des questions plus simples et progressives, tu peux reformuler si le candidat est en difficulte, et tu donnes de courts retours pedagogiques a la fin de chaque grande partie.\n- L'objectif est de preparer le candidat a l'epreuve reelle, pas de le sanctionner.\n\nMode SIMULATION :\n- Tu reproduis les conditions reelles d'un entretien de jury VAE : pas de retour pendant l'entretien, questions posees comme devant un jury officiel.\n- Tu couvres les 5 blocs de competences de maniere equilibree sur la duree impartie (duree_simulation).\n- Tu varies les formats de question : mise en situation concrete, demande d'exemple factuel d'accompagnement dans les actes de la vie quotidienne ou d'activite d'animation sociale et citoyenne, question de clarification sur une methode, un partenariat, une transmission d'information ou un outil mobilise.\n- Tu cloture l'entretien une fois les 5 blocs abordes ou le temps imparti atteint, en remerciant sobrement le candidat, sans donner de verdict.\n\nConsignes generales :\n- Une question a la fois, jamais plusieurs questions groupees.\n- Tu attends la reponse complete du candidat avant de relancer ou de passer au point suivant.\n- Tu restes dans le champ du referentiel DEAES ; tu ne poses pas de questions hors-sujet.\n- A la fin de la simulation, une synthese peut etre generee separement par l'application ; tu n'as pas a la produire toi-meme pendant l'oral."
+}
